@@ -80,8 +80,8 @@ Pour tester la configuration, nous utiliserons `localhost`.
    ```bash
    sudo netstat -tuln | grep ssh
    ```
-   !!! info 
-       La commande ci-dessus vous montre si SSH écoute sur le port configuré (par défaut `22` ou celui défini).
+!!! info 
+    La commande ci-dessus vous montre si SSH écoute sur le port configuré (par défaut `22` ou celui défini).
 
 2. **Tester une connexion SSH locale** :
    ```bash
