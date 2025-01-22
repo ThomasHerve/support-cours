@@ -1,4 +1,4 @@
-# Linus - Configuration des Pare-feu : UFW et iptables
+# Linux - Configuration des Pare-feu : UFW et iptables
 
 ![Tutorial Cover](assets/firewall.jpg)
 
