@@ -151,44 +151,6 @@ Pour renforcer la sécurité, désactivez l'authentification par mot de passe ap
    ssh <votre_utilisateur>@localhost
    ```
    !!! info
-   Si tout est configuré correctement, seul l'accès par clé SSH sera autorisé.
-
----
-
-## Étape 7 : Sécuriser davantage le Serveur SSH
-
-- **Activer le pare-feu** :
-  ```bash
-  sudo ufw allow 22/tcp
-  sudo ufw enable
-  ```
-
-- **Limiter les tentatives de connexion** (exemple avec fail2ban) :
-  ```bash
-  sudo apt install fail2ban
-  sudo systemctl enable fail2ban
-  ```
-
----
-
-## Étape 8 : Résolution des Problèmes Courants
-
-1. **Vérifier si SSH est actif** :
-   ```bash
-   sudo systemctl status ssh
-   ```
-
-2. **Consulter les logs** :
-   ```bash
-   sudo journalctl -u ssh
-   ```
-
-3. **Vérifier les permissions des fichiers** :
-   ```bash
-   ls -ld ~/.ssh ~/.ssh/authorized_keys
-   ```
-   Assurez-vous que :
-   - `.ssh` a des permissions `700`.
-   - `authorized_keys` a des permissions `600`.
+   Si tout est configuré correctement, seul l'accès par clé SSH sera autorisé. essayez de vous connecter avec un autre utilisateur pour le constater.
 
 ---
