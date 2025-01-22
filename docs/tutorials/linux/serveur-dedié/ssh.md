@@ -93,8 +93,8 @@ Pour tester la configuration, nous utiliserons `localhost`.
    ```bash
    ssh -p 2222 <votre_utilisateur>@localhost
    ```
-   !!! info 
-       Si vous avez changé le port dans `/etc/ssh/sshd_config`, cette commande vérifie que la connexion fonctionne correctement.
+!!! info 
+    Si vous avez changé le port dans `/etc/ssh/sshd_config`, cette commande vérifie que la connexion fonctionne correctement.
 
 4. **Vérification des logs** :
    Si un problème survient, consultez les logs du service SSH :
@@ -104,7 +104,7 @@ Pour tester la configuration, nous utiliserons `localhost`.
 
 ---
 
-## Étape 5 : Configuration des Clés SSH (Optionnel mais Recommandé)
+## Étape 5 : Configuration des Clés SSH
 
 1. **Générer une paire de clés SSH** :
    Exécutez la commande suivante en tant qu'utilisateur :
@@ -123,12 +123,12 @@ Pour tester la configuration, nous utiliserons `localhost`.
    ```bash
    ssh <votre_utilisateur>@localhost
    ```
-   !!! info 
-       Si configuré correctement, la connexion devrait s'établir sans demander de mot de passe.
+!!! info 
+    Si configuré correctement, la connexion devrait s'établir sans demander de mot de passe.
 
 ---
 
-## Étape 6 : Désactiver l'Authentification par Mot de Passe (Optionnel)
+## Étape 6 : Désactiver l'Authentification par Mot de Passe
 
 Pour renforcer la sécurité, désactivez l'authentification par mot de passe après avoir configuré les clés SSH.
 
@@ -150,7 +150,7 @@ Pour renforcer la sécurité, désactivez l'authentification par mot de passe ap
    ```bash
    ssh <votre_utilisateur>@localhost
    ```
-   !!! info 
-       Si tout est configuré correctement, seul l'accès par clé SSH sera autorisé. essayez de vous connecter avec un autre utilisateur pour le constater.
+!!! info 
+    Si tout est configuré correctement, seul l'accès par clé SSH sera autorisé. essayez de vous connecter avec un autre utilisateur pour le constater.
 
 ---
