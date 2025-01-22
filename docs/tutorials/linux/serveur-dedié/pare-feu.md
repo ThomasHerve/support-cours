@@ -41,7 +41,7 @@ sudo ufw status
    sudo ufw allow ssh
    ```
 
-2. **Autoriser ou bloquer des ports spécifiques** :
+2. **Autoriser ou bloquer des ports spécifiques** :  
    \- Autoriser le HTTP (port 80) :
      ```bash
      sudo ufw allow 80/tcp
@@ -55,7 +55,7 @@ sudo ufw status
      sudo ufw deny 21/tcp
      ```
 
-3. **Autoriser un IP ou un réseau spécifique** :
+3. **Autoriser un IP ou un réseau spécifique** :  
    \- Autoriser une IP à se connecter à tout le serveur :
      ```bash
      sudo ufw allow from 192.168.1.100
@@ -89,7 +89,7 @@ sudo ufw enable
    nmap localhost
    ```
 
-2. **Tester les règles spécifiques** :
+2. **Tester les règles spécifiques** :  
    \- Pour tester si le port HTTP (80) est ouvert :
      ```bash
      curl http://localhost
@@ -175,7 +175,7 @@ Les modifications d’iptables ne sont pas persistantes par défaut. Pour sauveg
    nmap localhost
    ```
 
-3. **Tester un port spécifique** :
+3. **Tester un port spécifique** :  
    \- Pour vérifier si le port SSH (22) est accessible :
      ```bash
      nc -zv localhost 22
