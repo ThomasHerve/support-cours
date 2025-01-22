@@ -74,5 +74,13 @@ nav:
   # - Home: 'index.md'
   - Travaux Pratiques:
       - 'tutorials/index.md'
-      - RenderDoc:
-        - Frame Analysis: 'tutorials/renderdoc.md'
+      - Linux - serveur dedié:
+        - SSH: 'tutorials/linux/serveur-dedié.md/ssh.md'
+        - Pare feu: 'tutorials/linux/serveur-dedié.md/pare-feu.md'
+        - Services: 'tutorials/linux/serveur-dedié.md/services.md'
+        - Rsyslog: 'tutorials/linux/serveur-dedié.md/rsyslog.md'
+        - Analyse des logs: 'tutorials/linux/serveur-dedié.md/logs.md'
+        - Surveillance: 'tutorials/linux/serveur-dedié.md/surveillance.md'
+        - Sauvegardes: 'tutorials/linux/serveur-dedié.md/sauvegardes.md'
+        - Cronjobs: 'tutorials/linux/serveur-dedié.md/cronjobs.md'
+        - Restauration: 'tutorials/linux/serveur-dedié.md/restauration.md'
