@@ -1,5 +1,5 @@
 
-# Linus - Configuration de ssh
+# Linux - Configuration de ssh
 
 ![Tutorial Cover](assets/ssh.jpg)
 
