@@ -80,7 +80,8 @@ Pour tester la configuration, nous utiliserons `localhost`.
    ```bash
    sudo netstat -tuln | grep ssh
    ```
-   !!! info La commande ci-dessus vous montre si SSH écoute sur le port configuré (par défaut `22` ou celui défini).
+   !!! info 
+       La commande ci-dessus vous montre si SSH écoute sur le port configuré (par défaut `22` ou celui défini).
 
 2. **Tester une connexion SSH locale** :
    ```bash
@@ -92,8 +93,8 @@ Pour tester la configuration, nous utiliserons `localhost`.
    ```bash
    ssh -p 2222 <votre_utilisateur>@localhost
    ```
-   !!! info
-   Si vous avez changé le port dans `/etc/ssh/sshd_config`, cette commande vérifie que la connexion fonctionne correctement.
+   !!! info 
+       Si vous avez changé le port dans `/etc/ssh/sshd_config`, cette commande vérifie que la connexion fonctionne correctement.
 
 4. **Vérification des logs** :
    Si un problème survient, consultez les logs du service SSH :
@@ -122,7 +123,8 @@ Pour tester la configuration, nous utiliserons `localhost`.
    ```bash
    ssh <votre_utilisateur>@localhost
    ```
-   !!! info Si configuré correctement, la connexion devrait s'établir sans demander de mot de passe.
+   !!! info 
+       Si configuré correctement, la connexion devrait s'établir sans demander de mot de passe.
 
 ---
 
@@ -148,6 +150,7 @@ Pour renforcer la sécurité, désactivez l'authentification par mot de passe ap
    ```bash
    ssh <votre_utilisateur>@localhost
    ```
-   !!! info Si tout est configuré correctement, seul l'accès par clé SSH sera autorisé. essayez de vous connecter avec un autre utilisateur pour le constater.
+   !!! info 
+       Si tout est configuré correctement, seul l'accès par clé SSH sera autorisé. essayez de vous connecter avec un autre utilisateur pour le constater.
 
 ---
