@@ -32,10 +32,6 @@ sudo ufw status
   ```bash
   sudo apt update && sudo apt install ufw
   ```
-
-!!! info
-    Une fois installé, assurez-vous qu'aucune règle par défaut ne bloque `localhost`.
-
 ---
 
 ### Étape 1.2 : Configurer les règles de base
@@ -46,25 +42,25 @@ sudo ufw status
    ```
 
 2. **Autoriser ou bloquer des ports spécifiques** :
-   - Autoriser le HTTP (port 80) :
+   \- Autoriser le HTTP (port 80) :
      ```bash
      sudo ufw allow 80/tcp
      ```
-   - Autoriser le HTTPS (port 443) :
+   \- Autoriser le HTTPS (port 443) :
      ```bash
      sudo ufw allow 443/tcp
      ```
-   - Bloquer un port :
+   \- Bloquer un port :
      ```bash
      sudo ufw deny 21/tcp
      ```
 
 3. **Autoriser un IP ou un réseau spécifique** :
-   - Autoriser une IP à se connecter à tout le serveur :
+   \- Autoriser une IP à se connecter à tout le serveur :
      ```bash
      sudo ufw allow from 192.168.1.100
      ```
-   - Autoriser une IP pour un port spécifique :
+   \- Autoriser une IP pour un port spécifique :
      ```bash
      sudo ufw allow from 192.168.1.100 to any port 22
      ```
@@ -94,11 +90,11 @@ sudo ufw enable
    ```
 
 2. **Tester les règles spécifiques** :
-   - Pour tester si le port HTTP (80) est ouvert :
+   \- Pour tester si le port HTTP (80) est ouvert :
      ```bash
      curl http://localhost
      ```
-   - Pour tester un port bloqué (par exemple FTP sur 21) :
+   \- Pour tester un port bloqué (par exemple FTP sur 21) :
      ```bash
      nc -zv localhost 21
      ```
@@ -180,11 +176,11 @@ Les modifications d’iptables ne sont pas persistantes par défaut. Pour sauveg
    ```
 
 3. **Tester un port spécifique** :
-   - Pour vérifier si le port SSH (22) est accessible :
+   \- Pour vérifier si le port SSH (22) est accessible :
      ```bash
      nc -zv localhost 22
      ```
-   - Pour un port bloqué, comme le port HTTP si non autorisé :
+   \- Pour un port bloqué, comme le port HTTP si non autorisé :
      ```bash
      curl http://localhost
      ```
