@@ -101,6 +101,10 @@ Fail2ban utilise des **jails** (prisons) pour définir des règles spécifiques 
    ```bash
    sudo systemctl restart fail2ban
    ```
+Pour WSL
+   ```bash
+   sudo service fail2ban restart 
+   ```
 
 2. **Simulez une attaque par force brute sur SSH** :  
    - Essayez de vous connecter avec un mot de passe incorrect :
