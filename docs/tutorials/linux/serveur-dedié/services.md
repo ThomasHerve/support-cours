@@ -1,4 +1,4 @@
-# Linus - Sécurisation des Services avec Fail2ban et PortSentry
+# Linux - Sécurisation des Services avec Fail2ban et PortSentry
 
 ![Tutorial Cover](assets/security.jpg)
 

@@ -1,4 +1,4 @@
-# Linus - Configuration et Utilisation de Rsyslog
+# Linux - Configuration et Utilisation de Rsyslog
 
 ![Tutorial Cover](assets/rsyslog.jpg)
 
