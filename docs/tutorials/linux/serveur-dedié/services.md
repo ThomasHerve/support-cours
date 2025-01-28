@@ -78,8 +78,7 @@ Fail2ban utilise des **jails** (prisons) pour définir des règles spécifiques 
      ```
    \- Modifiez les paramètres principaux :
      ```text
-     ignoreip = 127.0.0.1/8 ::1  # Exclure localhost des bannissements
-     bantime = 3600             # Durée du bannissement (en secondes)
+     bantime = 1m             # Durée du bannissement
      maxretry = 3               # Nombre de tentatives avant le bannissement
      ```
 
