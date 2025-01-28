@@ -71,7 +71,7 @@ Fail2ban utilise des **jails** (prisons) pour définir des règles spécifiques 
    sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
    ```
 
-2. **Configurer les options générales** :
+2. **Configurer les options générales** :  
    \- Ouvrez le fichier `/etc/fail2ban/jail.local` :
      ```bash
      sudo nano /etc/fail2ban/jail.local
@@ -216,7 +216,7 @@ Lorsque PortSentry bannit une IP, elle est ajoutée aux règles iptables ou au f
    sudo iptables -D INPUT -s <IP_BANNEE> -j DROP
    ```
 
-2. **Supprimer une IP bannie dans `/etc/hosts.deny`** (si configuré) :
+2. **Supprimer une IP bannie dans `/etc/hosts.deny`** (si configuré) :  
    \- Ouvrez le fichier :
      ```bash
      sudo nano /etc/hosts.deny
