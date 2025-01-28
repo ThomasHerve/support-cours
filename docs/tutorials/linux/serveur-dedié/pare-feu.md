@@ -131,7 +131,7 @@ Si la commande retourne des chaînes de règles (INPUT, FORWARD, OUTPUT), alors 
    sudo iptables -P INPUT DROP
    ```
 !!! info
-   Vous pouvez verifier en tentant de vous reconnecter en ssh
+    Vous pouvez verifier en tentant de vous reconnecter en ssh
 
 2. **Autoriser le trafic sortant** :
    ```bash
