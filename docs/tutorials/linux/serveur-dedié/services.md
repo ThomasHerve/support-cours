@@ -72,11 +72,11 @@ Fail2ban utilise des **jails** (prisons) pour définir des règles spécifiques 
    ```
 
 2. **Configurer les options générales** :
-   - Ouvrez le fichier `/etc/fail2ban/jail.local` :
+   \- Ouvrez le fichier `/etc/fail2ban/jail.local` :
      ```bash
      sudo nano /etc/fail2ban/jail.local
      ```
-   - Modifiez les paramètres principaux :
+   \- Modifiez les paramètres principaux :
      ```text
      ignoreip = 127.0.0.1/8 ::1  # Exclure localhost des bannissements
      bantime = 3600             # Durée du bannissement (en secondes)
@@ -107,11 +107,11 @@ Pour WSL
    ```
 
 2. **Simulez une attaque par force brute sur SSH** :  
-   - Essayez de vous connecter avec un mot de passe incorrect :
+   \- Essayez de vous connecter avec un mot de passe incorrect :
      ```bash
      ssh invalid_user@localhost
      ```
-   - Après plusieurs tentatives échouées (selon `maxretry`), votre IP sera bannie.
+   \- Après plusieurs tentatives échouées (selon `maxretry`), votre IP sera bannie.
 
 3. **Vérifiez les IP bannies** :
    ```bash
@@ -217,11 +217,11 @@ Lorsque PortSentry bannit une IP, elle est ajoutée aux règles iptables ou au f
    ```
 
 2. **Supprimer une IP bannie dans `/etc/hosts.deny`** (si configuré) :
-   - Ouvrez le fichier :
+   \- Ouvrez le fichier :
      ```bash
      sudo nano /etc/hosts.deny
      ```
-   - Recherchez et supprimez la ligne contenant l'IP bannie.
+   \- Recherchez et supprimez la ligne contenant l'IP bannie.
 
 3. **Redémarrez PortSentry** :
    ```bash
