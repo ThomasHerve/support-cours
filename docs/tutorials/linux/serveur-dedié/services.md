@@ -237,4 +237,4 @@ Lorsque PortSentry bannit une IP, elle est ajoutée aux règles iptables ou au f
 
 ## Conclusion
 
-Fail2ban et PortSentry permettent de sécuriser efficacement vos services contre les attaques courantes et les tentatives d’intrusion. En combinant ces outils, vous renforcez significativement la sécurité de votre serveur. Pensez à tester régulièrement vos règles sur `localhost` avant une mise en production. 
+Fail2ban et PortSentry permettent de sécuriser efficacement vos services contre les attaques courantes et les tentatives d’intrusion. En combinant ces outils, vous renforcez significativement la sécurité de votre serveur. Pensez à tester régulièrement vos règles sur `localhost` avant une mise en production. Malheureusement les limitations du WSL ou de simplement tester en local vous limite dans la démonstration, mais ces blocages sont bien effectifs si vous essayez sur un vrai serveur exposé à internet. 
