@@ -64,7 +64,6 @@ sudo ufw status
      ```bash
      sudo ufw allow from 192.168.1.100 to any port 22
      ```
-
 ---
 
 ### Étape 1.3 : Activer UFW
@@ -76,11 +75,14 @@ sudo ufw enable
 ```
 
 !!! info
-    Une fois activé, toutes les connexions non autorisées seront bloquées par défaut.
+    Une fois activé, toutes les connexions non autorisées seront bloquées par défaut. Sur WSL la commande peut avoir un comportement étrange, si une erreur s'affiche mais  qu'en relançant le WSL et en lançant "ufw status" vous avez un résultat cohérent c'est que la config à été prise en compte.
 
 ---
 
 ### Étape 1.4 : Tester la configuration UFW en local
+
+!!! info
+    Si vous etes sur WSL, ignorez cette partie et allez directement à la partie 2, malheureusement le WSL n'est pas un vrai noyaux linux, ce qui rend en réalité ufw completement inopérant. Exécutez bien "sudo ufw disable" pour pouvoir continuer.
 
 1. **Vérifiez les ports autorisés** :
    Utilisez `nmap` pour scanner les ports de `localhost` :
@@ -128,6 +130,8 @@ Si la commande retourne des chaînes de règles (INPUT, FORWARD, OUTPUT), alors 
    ```bash
    sudo iptables -P INPUT DROP
    ```
+!!! info
+   Vous pouvez verifier en tentant de vous reconnecter en ssh
 
 2. **Autoriser le trafic sortant** :
    ```bash
@@ -135,6 +139,9 @@ Si la commande retourne des chaînes de règles (INPUT, FORWARD, OUTPUT), alors 
    ```
 
 3. **Autoriser uniquement SSH** :
+  
+  Si vous etes sur WSL cela ne fonctionnera pas, je vous invite à passer directement au 2.3
+
    ```bash
    sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
    ```
@@ -164,6 +171,19 @@ Les modifications d’iptables ne sont pas persistantes par défaut. Pour sauveg
 ---
 
 ### Étape 2.4 : Tester la configuration iptables en local
+
+Encore une fois si vous etes sur wsl je vous invite à simplement lire et prendre connaissance des informations ci-dessous, vous ne pourrez pas tester.
+Vous pouvez néanmoins constater la différence (nmap et curl) après avoir executé.
+
+```bash
+sudo iptables -P OUTPUT ACCEPT
+```
+
+puis 
+
+```bash
+sudo iptables -P OUTPUT ACCEPT
+```
 
 1. **Vérifiez les règles appliquées** :
    ```bash

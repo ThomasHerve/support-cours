@@ -70,6 +70,11 @@ Pour appliquer les modifications, redémarrez le service SSH :
 sudo systemctl restart ssh
 ```
 
+**SUR WSL**
+```bash
+sudo service ssh restart
+```
+
 ---
 
 ## Étape 4 : Tester la Configuration SSH en Local
