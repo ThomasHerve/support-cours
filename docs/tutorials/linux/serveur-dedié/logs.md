@@ -224,4 +224,4 @@ Les journaux de sécurité sont une ressource précieuse pour détecter des conn
 
 ## Conclusion
 
-Les fichiers journaux comme **auth.log** sont des outils puissants pour surveiller l’intégrité de votre système et détecter les activités malveillantes. Associés à Syslog, ils permettent de centraliser, filtrer et analyser efficacement les événements critiques. En suivant ce guide, vous êtes prêt à identifier et à répondre aux incidents de sécurité. 🎉
+Les fichiers journaux comme **auth.log** sont des outils puissants pour surveiller l’intégrité de votre système et détecter les activités malveillantes. Associés à Syslog, ils permettent de centraliser, filtrer et analyser efficacement les événements critiques. En suivant ce guide, vous êtes prêt à identifier et à répondre aux incidents de sécurité. 
