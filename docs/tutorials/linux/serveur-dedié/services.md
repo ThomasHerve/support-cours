@@ -92,6 +92,10 @@ Fail2ban utilise des **jails** (prisons) pour définir des règles spécifiques 
    maxretry = 3
    ```
 
+4. **Créer le fichier de logs**
+```bash
+sudo touch /var/log/auth.log
+```
 ---
 
 ### Étape 1.3 : Tester Fail2ban
@@ -111,6 +115,7 @@ Pour WSL
      ssh invalid_user@localhost
      ```
    \- Après plusieurs tentatives échouées (selon `maxretry`), votre IP sera bannie.
+   \- Selon votre système (surtout WSL...) cela peut ne ps fonctionner. Dans ce cas là passez à PortSentry.
 
 3. **Vérifiez les IP bannies** :
    ```bash
@@ -145,7 +150,7 @@ Pour WSL
 
 2. **Vérifiez l’installation** :
    ```bash
-   portsentry -version
+   sudo portsentry -version
    ```
 
 ---
