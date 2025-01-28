@@ -176,19 +176,19 @@ Pour WSL
    BLOCK_TCP="1"
    ```
 
-4. **Configurer les actions en cas de détection** :  
-   Pour bloquer une IP via iptables :
-   ```text
-   KILL_ROUTE="/sbin/iptables -I INPUT -s $TARGET$ -j DROP"
+4. **Permettre le blocage de localhost pour les besoins du tp**
+   ```bash
+   sudo nano /etc/portsentry/portsentry.ignore
+   sudo nano /etc/portsentry/portsentry.ignore.static
    ```
-
+   Supprimez les lignes de ces fichiers.
 ---
 
 ### Étape 2.3 : Tester PortSentry
 
 1. **Démarrez PortSentry** :
    ```bash
-   sudo systemctl start portsentry
+   sudo service portsentry start 
    ```
 
 2. **Simulez une tentative de scan de port** :  
@@ -198,15 +198,13 @@ Pour WSL
    ```
    - Si PortSentry est actif, il détectera le scan et bloquera l'IP.
 
-3. **Vérifiez les logs** :
-   ```bash
-   sudo tail -f /var/log/syslog
-   ```
-   Les actions de PortSentry y sont enregistrées.
-
-4. **Vérifiez les règles iptables ajoutées** :
+3. **Vérifiez les règles iptables ajoutées** :
    ```bash
    sudo iptables -L -v
+   ```
+   Cela ne fonctionne pas sur tout les systèmes, WSL en tête. vous pouvez néanmoins vérifier que le scan a été détecté de cette manière:
+   ```bash
+    sudo cat /etc/hosts.deny
    ```
 
 ---
