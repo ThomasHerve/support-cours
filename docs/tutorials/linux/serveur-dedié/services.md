@@ -52,6 +52,14 @@ PortSentry est conçu pour détecter les scans de ports, une technique utilisée
    sudo systemctl status fail2ban
    ```
 
+   Pour WSL
+
+   ```bash
+   sudo service fail2ban status
+   sudo service fail2ban start
+   sudo service fail2ban status
+   ```
+
 ---
 
 ### Étape 1.2 : Configurer Fail2ban
