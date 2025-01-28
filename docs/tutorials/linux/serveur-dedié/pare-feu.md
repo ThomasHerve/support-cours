@@ -176,13 +176,13 @@ Encore une fois si vous etes sur wsl je vous invite à simplement lire et prendr
 Vous pouvez néanmoins constater la différence (nmap et curl) après avoir executé.
 
 ```bash
-sudo iptables -P OUTPUT ACCEPT
+sudo iptables -P INPUT DROP
 ```
 
 puis 
 
 ```bash
-sudo iptables -P OUTPUT ACCEPT
+sudo iptables -P INPUT ACCEPT
 ```
 
 1. **Vérifiez les règles appliquées** :
