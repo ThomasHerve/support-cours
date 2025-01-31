@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Les journaux de sécurité sont une ressource précieuse pour détecter des connexions suspectes, des tentatives de brute-force ou des activités non autorisées. Ce guide vous explique comment utiliser **auth.log** (le fichier journal dédié aux authentifications) et **Syslog** pour centraliser et analyser ces événements. Vous apprendrez également à configurer, interpréter et exploiter ces logs pour renforcer la sécurité.
+Les journaux de sécurité sont une ressource précieuse pour détecter des connexions suspectes, des tentatives de brute-force ou des activités non autorisées. Ce guide vous explique comment utiliser **auth.log** (le fichier journal dédié aux authentifications).
 
 ---
 
