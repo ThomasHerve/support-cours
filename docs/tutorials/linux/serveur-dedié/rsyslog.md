@@ -17,206 +17,259 @@ Rsyslog est un démon puissant et flexible pour la gestion des journaux système
 
 ---
 
-## Partie 1 : Installation de Rsyslog
+## Partie 1 : Utilisation via docker
 
-### Étape 1.1 : Vérification de l'installation
+Nous allons maintenant faire un maximum de choses via docker, car pour les étudiants sur windows et mac les outils que nous allins voir ne peuvent tout simplement pas fonctionner.
 
-Rsyslog est souvent installé par défaut sur les systèmes modernes. Vérifiez sa présence avec :
-```bash
-rsyslogd -v
+### Étape 1.1 : Installer docker si non présent sur votre système
+
+Je vous invite à aller consulter la documentation de docker desktop.
+
+### Étape 1.2 : Créer le Fichier **docker-compose.yml**
+
+Nous allons définir deux services :
+\- Le serveur Rsyslog qui écoute les logs envoyés par les clients.
+\- Un client Rsyslog qui génère et envoie ses logs.
+
+Créez un fichier docker-compose.yml :
+```yaml
+
+services:
+  rsyslog-server:
+    image: rsyslog/syslog_appliance_alpine
+    container_name: rsyslog-server
+    hostname: rsyslog-server
+    volumes:
+      - ./server/rsyslog.conf:/etc/rsyslog.conf
+      - ./server/logs:/var/log
+    ports:
+      - "514:514/udp"
+      - "514:514/tcp"
+    networks:
+      - rsyslog-net
+
+  rsyslog-client:
+    image: rsyslog/syslog_appliance_alpine
+    container_name: rsyslog-client
+    hostname: rsyslog-client
+    volumes:
+      - ./client/rsyslog.conf:/etc/rsyslog.conf
+    depends_on:
+      - rsyslog-server
+    networks:
+      - rsyslog-net
+
+networks:
+  rsyslog-net:
 ```
-Si Rsyslog est installé, la version s'affiche.
 
----
-
-### Étape 1.2 : Installer Rsyslog (si nécessaire)
-
-1. Installez Rsyslog via votre gestionnaire de paquets :
-   ```bash
-   # Ubuntu/Debian
-   sudo apt update && sudo apt install rsyslog
-
-   # CentOS/RedHat
-   sudo yum install rsyslog
-
-   # SUSE
-   sudo zypper install rsyslog
-   ```
-
-2. Démarrez et activez le service :
-   ```bash
-   sudo systemctl start rsyslog
-   sudo systemctl enable rsyslog
-   ```
-
-3. Vérifiez l’état du service :
-   ```bash
-   sudo systemctl status rsyslog
-   ```
-
----
+N'éxecutez pas ce fichier tout de suite
 
 ## Partie 2 : Configuration de Base de Rsyslog
 
-### Étape 2.1 : Localisation des fichiers de configuration
+### Étape 2.1 : Configuration du Serveur Rsyslog
 
-Le fichier principal de configuration de Rsyslog se trouve ici :
+1. Créez le dossier pour le serveur Rsyslog :
+
 ```bash
-/etc/rsyslog.conf
-```
-Les configurations spécifiques peuvent être ajoutées dans :
-```bash
-/etc/rsyslog.d/*.conf
+mkdir -p server/logs
 ```
 
+2. Créez et éditez server/rsyslog.conf :
+```text
+# /etc/rsyslog.conf configuration file for rsyslog
+#
+# For more information install rsyslog-doc and see
+# /usr/share/doc/rsyslog-doc/html/configuration/index.html
+#
+# Default logging rules can be found in /etc/rsyslog.d/50-default.conf
+
+
+#################
+#### MODULES ####
+#################
+
+module(load="imuxsock") # provides support for local system logging
+#module(load="immark")  # provides --MARK-- message capability
+
+# provides UDP syslog reception
+#module(load="imudp")
+#input(type="imudp" port="514")
+
+# provides TCP syslog reception
+#module(load="imtcp")
+#input(type="imtcp" port="514")
+
+# provides kernel logging support and enable non-kernel klog messages
+module(load="imklog" permitnonkernelfacility="on")
+
+###########################
+#### GLOBAL DIRECTIVES ####
+###########################
+
+# Filter duplicated messages
+$RepeatedMsgReduction on
+
+#
+# Set the default permissions for all log files.
+#
+$FileOwner syslog
+$FileGroup adm
+$FileCreateMode 0640
+$DirCreateMode 0755
+$Umask 0022
+$PrivDropToUser syslog
+$PrivDropToGroup syslog
+
+#
+# Where to place spool and state files
+#
+$WorkDirectory /var/spool/rsyslog
+
+#
+# Include all config files in /etc/rsyslog.d/
+#
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+#################################
+#### COMMANDES POUR LE COURS ####
+#################################
+
+module(load="imudp") # Active UDP
+input(type="imudp" port="514")
+
+module(load="imtcp") # Active TCP
+input(type="imtcp" port="514")
+
+# Stocker tous les logs reçus dans un fichier dédié
+*.* /var/log/remote.log
+```
+
+Je vous invite à regarder la partie du bas du fichier. Nous declarons quel ports ecouter et dans quel fichier ecrire.
+
+
+### Étape 2.2 : Configuration du Client Rsyslog
+
+1. Créez le dossier pour le client Rsyslog :
+
+```bash 
+mkdir client
+```
+
+2. Créez et éditez client/rsyslog.conf :
+
+```text
+# /etc/rsyslog.conf configuration file for rsyslog
+#
+# For more information install rsyslog-doc and see
+# /usr/share/doc/rsyslog-doc/html/configuration/index.html
+#
+# Default logging rules can be found in /etc/rsyslog.d/50-default.conf
+
+
+#################
+#### MODULES ####
+#################
+
+module(load="imuxsock") # provides support for local system logging
+#module(load="immark")  # provides --MARK-- message capability
+
+# provides UDP syslog reception
+#module(load="imudp")
+#input(type="imudp" port="514")
+
+# provides TCP syslog reception
+#module(load="imtcp")
+#input(type="imtcp" port="514")
+
+# provides kernel logging support and enable non-kernel klog messages
+module(load="imklog" permitnonkernelfacility="on")
+
+###########################
+#### GLOBAL DIRECTIVES ####
+###########################
+
+# Filter duplicated messages
+$RepeatedMsgReduction on
+
+#
+# Set the default permissions for all log files.
+#
+$FileOwner syslog
+$FileGroup adm
+$FileCreateMode 0640
+$DirCreateMode 0755
+$Umask 0022
+$PrivDropToUser syslog
+$PrivDropToGroup syslog
+
+#
+# Where to place spool and state files
+#
+$WorkDirectory /var/spool/rsyslog
+
+#
+# Include all config files in /etc/rsyslog.d/
+#
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+#################################
+#### COMMANDES POUR LE COURS ####
+#################################
+
+*.* @rsyslog-server:514  # Envoie des logs via UDP
+*.* @@rsyslog-server:514 # Envoie des logs via TCP
+```
+
+Rappel: rsyslog-server est une **url**, cette dernière est le nom du serveur sur le reseau docker, dans la vrai vie cela serait soit une ip soit un nom de domaine.
+
 ---
 
-### Étape 2.2 : Exemple de Configuration Locale
-
-1. Ouvrez le fichier de configuration principal :
-   ```bash
-   sudo nano /etc/rsyslog.conf
-   ```
-
-2. Activez les modules nécessaires :
-   \- Assurez-vous que les modules d'entrée sont décommentés :
-     ```text
-     module(load="imuxsock")  # Logs générés localement
-     module(load="imklog")   # Logs du kernel
-     ```
-
-3. Ajoutez une règle pour séparer les logs SSH dans un fichier dédié :
-   ```text
-   if $programname == 'sshd' then /var/log/ssh.log
-   & stop
-   ```
-
-4. Redémarrez Rsyslog pour appliquer les changements :
-   ```bash
-   sudo systemctl restart rsyslog
-   ```
-
----
-
-### Étape 2.3 : Tester la Configuration Locale
-
-1. **Générer un log pour SSH** :  
-   Essayez de vous connecter en SSH à `localhost` :
-   ```bash
-   ssh <votre_utilisateur>@localhost
-   ```
-
-2. **Vérifiez que le log est enregistré dans `/var/log/ssh.log`** :
-   ```bash
-   sudo tail -f /var/log/ssh.log
-   ```
-
-!!! info 
-    Cette méthode permet de confirmer que vos règles Rsyslog fonctionnent correctement.
-
----
-
-## Partie 3 : Configuration de Rsyslog comme Serveur Central
+## Partie 3 : Lancer les Conteneurs
 
 ### Étape 3.1 : Activer la réception des journaux distants
 
-1. Activez le module d’écoute pour les connexions réseau :
+1. Démarrer l’environnement Docker :
    ```bash
-   sudo nano /etc/rsyslog.conf
+   docker-compose up -d
    ```
 
-2. Décommentez les lignes pour activer les protocoles réseau :
+2. Vérifier que les conteneurs tournent :
    ```text
-   module(load="imtcp")  # Activer TCP
-   input(type="imtcp" port="514")  # Ecoute sur le port 514
-   module(load="imudp")  # Activer UDP
-   input(type="imudp" port="514")  # Ecoute sur le port 514
+   docker ps
    ```
-
-3. Redémarrez Rsyslog :
-   ```bash
-   sudo systemctl restart rsyslog
-   ```
-
 ---
 
-### Étape 3.2 : Configurer un Client pour envoyer des logs
+## Partie 4 : Tester la Configuration
 
-1. Ouvrez la configuration Rsyslog sur le client :
+### Étape 4.1 : Générer un Log sur le Client
+
+1. Accédez au conteneur client :
+
    ```bash
-   sudo nano /etc/rsyslog.conf
-   ```
+   docker exec -it rsyslog-client bash
 
-2. Ajoutez la ligne suivante pour envoyer les logs au serveur Rsyslog (remplacez `<IP_SERVEUR>` par `127.0.0.1` si vous testez en local) :
-   ```text
-   *.* @<IP_SERVEUR>:514  # Utilisation d’UDP
-   *.* @@<IP_SERVEUR>:514  # Utilisation de TCP
    ```
-
-3. Redémarrez le client Rsyslog :
+2. Générez un log avec la commande logger :
    ```bash
-   sudo systemctl restart rsyslog
+   logger "Test de log depuis le client Rsyslog"
    ```
 
----
 
-### Étape 3.3 : Tester la Configuration Réseau
+###  Étape 4.2 : Vérifier les Logs sur le Serveur
+Accédez au conteneur serveur :
 
-1. **Générer un log sur le client** :
    ```bash
-   logger "Ceci est un test pour Rsyslog"
+   docker exec -it rsyslog-server bash
    ```
 
-2. **Vérifiez sur le serveur que le log a été reçu** :
+Consultez les logs reçus :
+
    ```bash
-   sudo tail -f /var/log/syslog
+   tail -f /var/log/remote.log
    ```
 
-!!! info 
-    Assurez-vous que le port 514 est ouvert sur le serveur pour permettre les connexions.
-
----
-
-## Partie 4 : Utilisation Avancée de Rsyslog
-
-### Étape 4.1 : Rotation des logs
-
-Pour éviter que les fichiers de logs ne deviennent trop volumineux, configurez la rotation des logs avec `logrotate`.
-
-1. Créez un fichier de configuration pour vos logs personnalisés :
-   ```bash
-   sudo nano /etc/logrotate.d/rsyslog-custom
-   ```
-
-2. Ajoutez les règles de rotation :
-   ```text
-   /var/log/ssh.log {
-       weekly
-       rotate 4
-       compress
-       missingok
-       notifempty
-       create 640 syslog adm
-   }
-   ```
-
-3. Testez la configuration :
-   ```bash
-   sudo logrotate -f /etc/logrotate.d/rsyslog-custom
-   ```
-
----
-
-### Étape 4.2 : Filtres personnalisés
-
-Vous pouvez créer des règles avancées pour filtrer et trier les logs :
-- Exemple : Enregistrer les erreurs critiques dans un fichier dédié.
-   ```text
-   if $syslogseverity <= '3' then /var/log/critical.log
-   & stop
-   ```
-
----
+Vous devriez voir apparaître votre message envoyé depuis le client.
 
 ## Conclusion
 
