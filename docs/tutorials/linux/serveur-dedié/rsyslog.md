@@ -79,7 +79,7 @@ Les configurations spécifiques peuvent être ajoutées dans :
    ```
 
 2. Activez les modules nécessaires :
-   - Assurez-vous que les modules d'entrée sont décommentés :
+   \- Assurez-vous que les modules d'entrée sont décommentés :
      ```text
      module(load="imuxsock")  # Logs générés localement
      module(load="imklog")   # Logs du kernel
