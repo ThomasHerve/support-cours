@@ -1,4 +1,4 @@
-# Linux - Analyse des Logs de Sécurité avec Auth.log et Syslog
+# Linux - Analyse des Logs de Sécurité avec Auth.log
 
 ![Tutorial Cover](assets/authlog-syslog.jpg)
 
