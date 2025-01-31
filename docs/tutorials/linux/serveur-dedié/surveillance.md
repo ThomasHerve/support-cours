@@ -26,28 +26,11 @@ Dans un environnement informatique moderne, la surveillance des systèmes est es
 
 Pour faciliter l'installation et la configuration, vous pouvez utiliser **Docker Compose** pour déployer rapidement Zabbix et Nagios.
 
-### Étape 1.1 : Installer Docker et Docker Compose
-
-1. **Installez Docker** :
-   ```bash
-   sudo apt update
-   sudo apt install -y docker.io
-   ```
-
-2. **Installez Docker Compose** :
-   ```bash
-   sudo apt install -y docker-compose
-   ```
-
----
-
-### Étape 1.2 : Fichier Docker Compose
+### Étape 1.1 : Fichier Docker Compose
 
 Créez un fichier `docker-compose.yml` contenant les services pour Zabbix et Nagios :
 
 ```yaml
-version: '3.8'
-
 services:
   zabbix-server:
     image: zabbix/zabbix-server-mysql:latest
@@ -115,7 +98,7 @@ volumes:
 
 ---
 
-### Étape 1.3 : Démarrer les Services
+### Étape 1.2 : Démarrer les Services
 
 1. Lancez Docker Compose dans le répertoire contenant le fichier `docker-compose.yml` :
    ```bash
@@ -128,12 +111,12 @@ volumes:
    ```
 
 3. Accédez aux interfaces web :
-   - **Zabbix** : `http://<votre_IP>:8080`
-   - **Nagios** : `http://<votre_IP>:8081`
+   - **Zabbix** : `http://localhost:8080`
+   - **Nagios** : `http://localhost:8081`
 
 !!! info 
     Les identifiants par défaut pour **Nagios** sont définis dans le fichier Docker Compose (ex. `nagiosadmin` / `nagios_password`).
-
+    Les identifiants par défaut pour **Zabbix** sont Admin/zabbix
 ---
 
 ## Partie 2 : Utilisation des Outils
