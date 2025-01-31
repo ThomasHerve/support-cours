@@ -33,47 +33,48 @@ Créez un fichier `docker-compose.yml` contenant les services pour Zabbix et Nag
 ```yaml
 services:
   zabbix-server:
-    image: zabbix/zabbix-server-mysql:latest
+    image: zabbix/zabbix-server-pgsql:latest
     container_name: zabbix-server
     environment:
-      DB_SERVER_HOST: zabbix-mysql
-      MYSQL_USER: zabbix
-      MYSQL_PASSWORD: zabbix_password
-      MYSQL_DATABASE: zabbix
+      DB_SERVER_HOST: zabbix-postgres
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: zabbix
+      POSTGRES_DB: zabbix
     depends_on:
-      - zabbix-mysql
+      - zabbix-postgres
     ports:
       - "10051:10051"
     networks:
       - zabbix-net
 
   zabbix-web:
-    image: zabbix/zabbix-web-apache-mysql:latest
+    image: zabbix/zabbix-web-apache-pgsql:latest
     container_name: zabbix-web
     environment:
-      DB_SERVER_HOST: zabbix-mysql
-      MYSQL_USER: zabbix
-      MYSQL_PASSWORD: zabbix_password
-      MYSQL_DATABASE: zabbix
+      DB_SERVER_HOST: zabbix-postgres
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: zabbix
+      POSTGRES_DB: zabbix
     ports:
       - "8080:8080"
     depends_on:
       - zabbix-server
     networks:
       - zabbix-net
-
-  zabbix-mysql:
-    image: mysql:5.7
-    container_name: zabbix-mysql
+  
+  zabbix-postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: zabbix
-      MYSQL_USER: zabbix
-      MYSQL_PASSWORD: zabbix_password
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: zabbix
+      POSTGRES_DB: zabbix
+      PG_DATA: /var/lib/postgresql/data/pgdata
     networks:
       - zabbix-net
-    volumes:
-      - zabbix-mysql-data:/var/lib/mysql
 
   nagios:
     image: jasonrivers/nagios:latest
@@ -91,7 +92,6 @@ networks:
   zabbix-net:
 
 volumes:
-  zabbix-mysql-data:
   nagios-config:
   nagios-plugins:
 ```
