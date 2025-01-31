@@ -24,204 +24,91 @@ Les journaux de sécurité sont une ressource précieuse pour détecter des conn
 
 ## Partie 1 : Configuration et Accès aux Logs
 
-### Étape 1.1 : Vérification des Fichiers Journaux
+### Étape 1.1: Setup docker 
 
-1. Auth.log est situé dans :
+Comme dans le tp précédent, nous allons utiliser docker pour pouvoir utiliser des outils qui autrement demanderais un linux natif.
+
+1. Créez un nouveau dossier de travail
+2. Copiez votre clé id_rsa.pub dans votre dossier de travail
+3. Créez le dockerfile
+```dockerfile
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y openssh-server
+
+RUN useradd -m -s /bin/bash test&& echo "test:123456" | chpasswd
+RUN mkdir -p /home/test/.ssh 
+RUN chown test:test /home/test/.ssh 
+RUN chmod 700 /home/test/.ssh
+
+RUN mkdir -p /etc/ssh/logs && chown root:root /etc/ssh/logs && chmod 700 /etc/ssh/logs
+
+RUN mkdir -p /run/sshd && chown root:root /run/sshd && chmod 700 /run/sshd
+
+COPY id_rsa.pub /home/test/.ssh/authorized_keys
+RUN chmod 644 /home/test/.ssh/authorized_keys
+
+RUN sed -i '1i PasswordAuthentication no' /etc/ssh/sshd_config
+RUN sed -i '1i PermitEmptyPasswords no' /etc/ssh/sshd_config
+RUN sed -i '1i KbdInteractiveAuthentication no' /etc/ssh/sshd_config
+RUN sed -i '1i UsePAM yes' /etc/ssh/sshd_config
+RUN sed -i '1i PubkeyAuthentication yes' /etc/ssh/sshd_config
+RUN sed -i '1i X11Forwarding no' /etc/ssh/sshd_config
+RUN sed -i '1i PermitRootLogin no' /etc/ssh/sshd_config
+RUN sed -i '1i StrictModes yes' /etc/ssh/sshd_config
+RUN sed -i '1i LogLevel INFO' /etc/ssh/sshd_config
+
+RUN chmod 600 /etc/ssh/sshd_config
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D", "-E", "/etc/ssh/logs/auth.log"]
+```
+
+4. Créez un fichier docker-compose.yml
+```yaml
+services:
+  ssh:
+    build: .
+    container_name: ssh
+    ports:
+      - 2222:22
+
+    volumes:
+      - ./logs:/etc/ssh/logs
+```
+
+
+### Étape 1.2: Démarrer l'env
+
+1. Démarrer l’environnement Docker :
    ```bash
-   /var/log/auth.log
+   docker-compose up -d
    ```
 
-2. Vérifiez son contenu avec :
-   ```bash
-   sudo tail -f /var/log/auth.log
-   ```
-!!! info 
-    Si vous êtes sur une distribution CentOS ou RedHat, les logs d’authentification sont regroupés dans `/var/log/secure`.
-
----
-
-### Étape 1.2 : Installer et Configurer Syslog (si nécessaire)
-
-1. Vérifiez si **Rsyslog** est installé :
-   ```bash
-   rsyslogd -v
+2. Vérifier que les conteneurs tournent :
+   ```text
+   docker ps
    ```
 
-2. Installez-le si nécessaire :
+### Étape 1.3: Tester
+
+1. Connectez vous avec :
    ```bash
-   # Ubuntu/Debian
-   sudo apt update && sudo apt install rsyslog
-
-   # CentOS/RedHat
-   sudo yum install rsyslog
-
-   # SUSE
-   sudo zypper install rsyslog
+   ssh test@localhost -p 2222
    ```
-
-3. Activez et démarrez Syslog :
-   ```bash
-   sudo systemctl start rsyslog
-   sudo systemctl enable rsyslog
-   ```
-
----
+2. Vous pouvez directement consulter le fichier depuis votre systeme de fichier dans logs/auth.log à coté de cotre docker-compose.yaml
 
 ## Partie 2 : Analyse des Logs avec Auth.log
 
 ### Étape 2.1 : Détection de Connexions SSH
 
-1. Ouvrez auth.log pour analyser les connexions SSH :
-   ```bash
-   sudo grep "sshd" /var/log/auth.log
-   ```
-
-2. Points à analyser :
-   - **Connexions réussies** :
+1. Points à analyser :
+   \- **Connexions réussies** :
      ```text
      Accepted password for <user> from <IP> port <port> ssh2
      ```
-   - **Tentatives échouées** :
+   \- **Tentatives échouées** :
      ```text
      Failed password for invalid user <user> from <IP> port <port> ssh2
      ```
-
-3. Identifier une IP malveillante (ex. brute-force) :
-   ```bash
-   sudo grep "Failed password" /var/log/auth.log | awk '{print $11}' | sort | uniq -c | sort -nr
-   ```
-
-!!! info 
-    La commande ci-dessus compte et trie les IP ayant effectué des tentatives échouées.
-
----
-
-### Étape 2.2 : Suivi des Connexions Sudo
-
-1. Recherchez les commandes sudo exécutées :
-   ```bash
-   sudo grep "sudo:" /var/log/auth.log
-   ```
-
-2. Interprétez les logs :
-   - **Commande exécutée** :
-     ```text
-     Jan 28 10:12:00 linus sudo: user : TTY=pts/0 ; PWD=/home/user ; USER=root ; COMMAND=/usr/bin/apt update
-     ```
-   - **Échecs d'exécution** :
-     ```text
-     Jan 28 10:13:45 linus sudo: pam_unix(sudo:auth): authentication failure; logname=user
-     ```
-
----
-
-### Étape 2.3 : Détection de Modifications dans Auth.log
-
-1. Surveiller auth.log en temps réel :
-   ```bash
-   sudo tail -f /var/log/auth.log
-   ```
-
-2. Utilisez `watch` pour analyser les changements en continu :
-   ```bash
-   watch "sudo grep 'Failed password' /var/log/auth.log"
-   ```
-
----
-
-## Partie 3 : Intégration avec Syslog
-
-### Étape 3.1 : Centraliser les Logs Auth avec Syslog
-
-1. Ajoutez une règle pour capturer spécifiquement auth.log :
-   ```bash
-   sudo nano /etc/rsyslog.d/auth.conf
-   ```
-
-2. Insérez les lignes suivantes :
-   ```text
-   auth,authpriv.*                /var/log/auth_custom.log
-   ```
-
-3. Rechargez Syslog pour appliquer la configuration :
-   ```bash
-   sudo systemctl restart rsyslog
-   ```
-
-4. Vérifiez le fichier customisé :
-   ```bash
-   sudo tail -f /var/log/auth_custom.log
-   ```
-
-!!! info 
-    Ce fichier dédié simplifie l’analyse des journaux d’authentification.
-
----
-
-## Partie 4 : Exercices Pratiques
-
-### Exercice 1 : Détection de Tentatives de Brute-Force SSH
-
-1. Lancez une tentative de connexion SSH invalide :
-   ```bash
-   ssh invalid_user@localhost
-   ```
-
-2. Vérifiez l’apparition de l’échec dans auth.log :
-   ```bash
-   sudo tail -n 10 /var/log/auth.log
-   ```
-
-3. Identifiez les IP ayant échoué plusieurs fois :
-   ```bash
-   sudo grep "Failed password" /var/log/auth.log | awk '{print $11}' | sort | uniq -c
-   ```
-
----
-
-### Exercice 2 : Suivi des Connexions Utilisateur
-
-1. Connectez-vous en SSH :
-   ```bash
-   ssh your_user@localhost
-   ```
-
-2. Surveillez auth.log pour vérifier la connexion réussie :
-   ```bash
-   sudo tail -f /var/log/auth.log
-   ```
-
-3. Filtrez les connexions réussies uniquement :
-   ```bash
-   sudo grep "Accepted password" /var/log/auth.log
-   ```
-
----
-
-### Exercice 3 : Créez un Journal Personnalisé pour sudo
-
-1. Ajoutez une règle dans Syslog pour les commandes sudo :
-   ```bash
-   sudo nano /etc/rsyslog.d/sudo.conf
-   ```
-
-2. Ajoutez :
-   ```text
-   :programname, isequal, "sudo" /var/log/sudo.log
-   ```
-
-3. Rechargez Syslog :
-   ```bash
-   sudo systemctl restart rsyslog
-   ```
-
-4. Vérifiez les journaux sudo :
-   ```bash
-   sudo tail -f /var/log/sudo.log
-   ```
-
----
-
-## Conclusion
-
-Les fichiers journaux comme **auth.log** sont des outils puissants pour surveiller l’intégrité de votre système et détecter les activités malveillantes. Associés à Syslog, ils permettent de centraliser, filtrer et analyser efficacement les événements critiques. En suivant ce guide, vous êtes prêt à identifier et à répondre aux incidents de sécurité. 
+   \- Essayez de faire apparaitre ces lignes
