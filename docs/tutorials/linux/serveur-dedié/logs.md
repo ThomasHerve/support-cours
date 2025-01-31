@@ -14,12 +14,6 @@ Les journaux de sécurité sont une ressource précieuse pour détecter des conn
 - **Suivi des authentifications** : Captures des connexions SSH, sudo, échecs de connexion, etc.
 - **Détection d'activités suspectes** : Identifier des IP malveillantes ou des tentatives d'accès non autorisées.
 - **Dépannage** : Aide à résoudre les problèmes liés aux permissions et aux authentifications.
-
-### Syslog
-- **Centralisation des logs** : Permet de regrouper auth.log et d'autres journaux en un seul endroit.
-- **Filtrage et analyse** : Facilite l'identification rapide d'incidents critiques.
-- **Évolutivité** : Peut être intégré à des outils comme ElasticSearch pour une analyse avancée.
-
 ---
 
 ## Partie 1 : Configuration et Accès aux Logs
