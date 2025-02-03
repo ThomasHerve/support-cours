@@ -82,5 +82,3 @@ nav:
         - Analyse des logs: 'tutorials/linux/serveur-dedié.md/logs.md'
         - Surveillance: 'tutorials/linux/serveur-dedié.md/surveillance.md'
         - Sauvegardes: 'tutorials/linux/serveur-dedié.md/sauvegardes.md'
-        - Cronjobs: 'tutorials/linux/serveur-dedié.md/cronjobs.md'
-        - Restauration: 'tutorials/linux/serveur-dedié.md/restauration.md'
