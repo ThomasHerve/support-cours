@@ -90,7 +90,7 @@ volumes:
    nano app/index.php
    ```
 
-3. Ajoutez le code suivant (une interface minimale) :
+- Ajoutez le code suivant (une interface minimale) :
 
    ```php
    <?php
