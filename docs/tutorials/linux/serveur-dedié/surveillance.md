@@ -32,49 +32,79 @@ Créez un fichier `docker-compose.yml` contenant les services pour Zabbix et Nag
 
 ```yaml
 services:
-  zabbix-server:
-    image: zabbix/zabbix-server-pgsql:latest
-    container_name: zabbix-server
-    environment:
-      DB_SERVER_HOST: zabbix-postgres
-      POSTGRES_USER: zabbix
-      POSTGRES_PASSWORD: zabbix
-      POSTGRES_DB: zabbix
-    depends_on:
-      - zabbix-postgres
-    ports:
-      - "10051:10051"
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
     networks:
       - zabbix-net
+    ports:
+      - '3306:3306'
+    volumes:
+      - './zabbix/mysql:/var/lib/data'
+    environment:
+      - MYSQL_ROOT_PASSWORD=carryontech
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=carryontech
 
-  zabbix-web:
-    image: zabbix/zabbix-web-apache-pgsql:latest
-    container_name: zabbix-web
-    environment:
-      DB_SERVER_HOST: zabbix-postgres
-      POSTGRES_USER: zabbix
-      POSTGRES_PASSWORD: zabbix
-      POSTGRES_DB: zabbix
+  zabbix-server:
+    container_name: zabbix-server
+    image: zabbix/zabbix-server-mysql:ubuntu-5.0.1
+    networks:
+      - zabbix-net
+    links:
+      - mysql
+    restart: always
     ports:
-      - "8080:8080"
+      - '10051:10051'
+    volumes:
+      - './zabbix/alertscripts:/usr/lib/zabbix/alertscripts'
+    environment:
+      - DB_SERVER_HOST=mysql
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=carryontech
     depends_on:
-      - zabbix-server
+      - mysql
+
+  zabbix-frontend:
+    container_name: zabbix-frontend
+    image: zabbix/zabbix-web-apache-mysql:ubuntu-5.0.1
     networks:
       - zabbix-net
-  
-  zabbix-postgres:
-    image: postgres:latest
-    container_name: postgres
-    restart: unless-stopped
+    links:
+      - mysql
+    restart: always
     ports:
-      - "5432:5432"
+      - '8080:8080'
+      - '8443:8443'
     environment:
-      POSTGRES_USER: zabbix
-      POSTGRES_PASSWORD: zabbix
-      POSTGRES_DB: zabbix
-      PG_DATA: /var/lib/postgresql/data/pgdata
+      - DB_SERVER_HOST=mysql
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=carryontech
+      - PHP_TZ=America/Sao_Paulo
+    depends_on:
+      - mysql
+   
+  zabbix-agent:
+    container_name: zabbix-agent
+    image: zabbix/zabbix-agent2:alpine-5.0.1
+    user: root
     networks:
       - zabbix-net
+    links:
+      - zabbix-server
+    restart: always
+    privileged: true
+    volumes:
+      - /var/run:/var/run
+    ports:
+      - '10050:10050'
+    environment:
+      - ZBX_HOSTNAME=Zabbix server
+      - ZBX_SERVER_HOST=172.18.0.1
+
 
   nagios:
     image: jasonrivers/nagios:latest
@@ -94,6 +124,7 @@ networks:
 volumes:
   nagios-config:
   nagios-plugins:
+
 ```
 
 ---
@@ -124,7 +155,7 @@ volumes:
 ### Étape 2.1 : Ajouter un Hôte dans Zabbix
 
 1. Accédez à l'interface web de Zabbix.
-2. Naviguez vers **Configuration > Hosts** et cliquez sur **Create Host**.
+2. Naviguez vers **Monitoring > Hosts** et cliquez sur **Create Host**.
 3. Configurez :
    - **Host name** : Nom de l'hôte.
    - **Interfaces** : Adresse IP ou hostname.
