@@ -78,13 +78,13 @@ volumes:
 
 ### Étape 1.2 : Création de l'Application Web
 
-1. Créez un dossier `app` :
+- Créez un dossier `app` :
 
    ```bash
    mkdir app
    ```
 
-2. Ajoutez un fichier `index.php` dans `app/` :
+- Ajoutez un fichier `index.php` dans `app/` :
 
    ```bash
    nano app/index.php
@@ -148,13 +148,13 @@ Vous pouvez ajouter des messages qui seront stockés dans la base de données.
 
 ### Étape 2.1 : Effectuer une Sauvegarde
 
-1. Lancez une sauvegarde avec `mysqldump` :
+- Lancez une sauvegarde avec `mysqldump` :
 
    ```bash
    docker exec backup_service mysqldump -h db -u root -prootpassword --databases demo_db > backup/db_backup.sql
    ```
 
-2. Vérifiez le fichier généré :
+- Vérifiez le fichier généré :
 
    ```bash
    ls -lh backup/
@@ -167,13 +167,13 @@ Vous pouvez ajouter des messages qui seront stockés dans la base de données.
 
 ### Étape 2.2 : Simuler une Perte de Données
 
-1. Supprimez toutes les données de la table :
+- Supprimez toutes les données de la table :
 
    ```bash
    docker exec -it db_backup_demo mysql -h db -u root -prootpassword -e "DELETE FROM demo_db.messages;"
    ```
 
-2. Vérifiez que la base est vide :
+- Vérifiez que la base est vide :
 
    ```bash
    docker exec -it db_backup_demo mysql -h db -u root -prootpassword -e "SELECT * FROM demo_db.messages;"
@@ -186,13 +186,13 @@ Vous pouvez ajouter des messages qui seront stockés dans la base de données.
 
 ### Étape 2.3 : Restaurer la Base de Données
 
-1. Restaurez la base de données avec le fichier de sauvegarde :
+- Restaurez la base de données avec le fichier de sauvegarde :
 
    ```bash
    docker exec -i db_backup_demo mysql -h db -u root -prootpassword < backup/db_backup.sql
    ```
 
-2. Vérifiez que les données sont restaurées :
+- Vérifiez que les données sont restaurées :
 
    ```bash
    docker exec -it db_backup_demo mysql -h db -u root -prootpassword -e "SELECT * FROM demo_db.messages;"
@@ -207,13 +207,13 @@ Vous pouvez ajouter des messages qui seront stockés dans la base de données.
 
 Vous pouvez planifier une sauvegarde automatique avec **cron**.  
 
-1. Ouvrez le fichier crontab :
+- Ouvrez le fichier crontab :
 
    ```bash
    crontab -e
    ```
 
-2. Ajoutez la ligne suivante pour exécuter une sauvegarde toutes les 12 heures :
+- Ajoutez la ligne suivante pour exécuter une sauvegarde toutes les 12 heures :
 
    ```text
    0 */12 * * * docker exec backup_service mysqldump -u root -prootpassword --databases demo_db > backup/db_backup.sql
@@ -222,7 +222,7 @@ Vous pouvez planifier une sauvegarde automatique avec **cron**.
 !!! info 
     Cette tâche enregistrera une copie de la base de données deux fois par jour.
 
-3. Exercice: Ajoutez un conteneur qui execute ce cron toute les minutes et constatez sa bonne execution
+- Exercice: Ajoutez un conteneur qui execute ce cron toute les minutes et constatez sa bonne execution
 
 ---
 
