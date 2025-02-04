@@ -14,5 +14,3 @@
 
 ### Sauvegarde et reprise après sinistre
 * [TP: Sauvegardes](linux/serveur-dedié/sauvegardes.md): Stratégies de sauvegarde (locales et distantes).
-* [TP: Cronjobs](linux/serveur-dedié/cronjobs.md): Automatisation des sauvegardes avec cron.
-* [TP: Restauration](linux/serveur-dedié/restauration.md): Test de la restauration de données en cas de sinistre.
