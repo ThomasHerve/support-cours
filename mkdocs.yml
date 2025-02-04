@@ -75,13 +75,13 @@ nav:
   - Linux:
       - 'linux/index.md'
       - Linux - serveur dedié:
-        - SSH: 'linux/linux/serveur-dedié.md/ssh'
-        - Pare feu: 'linux/linux/serveur-dedié.md/pare-feu'
-        - Services: 'linux/linux/serveur-dedié.md/services'
-        - Rsyslog: 'linux/linux/serveur-dedié.md/rsyslog'
-        - Analyse des logs: 'linux/linux/serveur-dedié.md/logs'
-        - Surveillance: 'linux/linux/serveur-dedié.md/surveillance'
-        - Sauvegardes: 'linux/linux/serveur-dedié.md/sauvegardes'
+        - SSH: 'linux/linux/serveur-dedié/ssh'
+        - Pare feu: 'linux/linux/serveur-dedié/pare-feu'
+        - Services: 'linux/linux/serveur-dedié/services'
+        - Rsyslog: 'linux/linux/serveur-dedié/rsyslog'
+        - Analyse des logs: 'linux/linux/serveur-dedié/logs'
+        - Surveillance: 'linux/linux/serveur-dedié/surveillance'
+        - Sauvegardes: 'linux/linux/serveur-dedié/sauvegardes'
   - Docker:
       - 'docker/index.md'
       - Docker - introduction:
