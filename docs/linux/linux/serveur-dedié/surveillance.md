@@ -133,8 +133,8 @@ Avant de commencer, vous devez avoir :
    ```
 
 2. Connectez-vous avec les identifiants par défaut :
-   - **Utilisateur** : `Admin`
-   - **Mot de passe** : `zabbix`
+   \- **Utilisateur** : `Admin`
+   \- **Mot de passe** : `zabbix`
 
 ---
 
@@ -155,18 +155,18 @@ Zabbix fonctionne par template. Par defaut vous en avez une grande quantité dis
 
 1. Allez dans **Data collection** -> **Templates** et cliquez sur **Create template**.
 2. Remplissez les champs comme suit :
-   - **Template name** : `Template App HTTP`
-   - **Template groups** : `Templates` (celui par defaut)
+   \- **Template name** : `Template App HTTP`
+   \- **Template groups** : `Templates` (celui par defaut)
 
 3. Appuyez sur `Add`
 4. Cherchez votre template nouvellement créé via le système de filtre et cliquez sur **Items**
 5. Appuyez sur **Create Item**
 6. Remplissez les champs comme suit :
-   - **Name** : `HTTP Check`
-   - **Type** : `HTTP agent` (celui par defaut)
-   - **Key**: web.page.get
-   - **Type of information**: Text
-   - **URL**: my-app:80
+   \- **Name** : `HTTP Check`
+   \- **Type** : `HTTP agent` (celui par defaut)
+   \- **Key**: web.page.get
+   \- **Type of information**: Text
+   \- **URL**: my-app:80
 7. Vous pouvez tester la bonne execution grace au bouton **Test** puis vous pouvez sauvegarder l'item.
 
 
@@ -174,9 +174,9 @@ Zabbix fonctionne par template. Par defaut vous en avez une grande quantité dis
 
 1. Allez dans **Monitoring** -> **Hosts** et cliquez sur **Create host**.
 2. Remplissez les champs comme suit :
-   - **Host name** : `my-app`
-   - **Groups** : Vous pouvez créer un groupe "Docker" ou utiliser "Linux servers".
-   - **Template** : `Template App HTTP`
+   \- **Host name** : `my-app`
+   \- **Groups** : Vous pouvez créer un groupe "Docker" ou utiliser "Linux servers".
+   \- **Template** : `Template App HTTP`
 
 3. Cliquez sur **Add** pour enregistrer l'hôte.
 
@@ -186,9 +186,9 @@ Zabbix fonctionne par template. Par defaut vous en avez une grande quantité dis
 2. Cliquez sur **Triggers**
 3. Cliquez sur **Create trigger**
 4. Remplissez les champs comme suit :
-   - **Name** : `my-app trigger`
-   - **Severity**: `High`
-   - **Expression** : `nodata(/my-app/web.page.get,10)=1` (Nous verifions si nous avons de la donnée depuis les 10 dernières secondes)
+   \- **Name** : `my-app trigger`
+   \- **Severity**: `High`
+   \- **Expression** : `nodata(/my-app/web.page.get,10)=1` (Nous verifions si nous avons de la donnée depuis les 10 dernières secondes)
 5. CLiquez sur **Add**
 ---
 
@@ -201,11 +201,11 @@ Zabbix fonctionne par template. Par defaut vous en avez une grande quantité dis
 
 ### Étape 4.2 : Résultats Attendus
 
-- **Quand le conteneur est UP (actif)** :
-  - De la donnée coté latest data et aucun problèmes
+\- **Quand le conteneur est UP (actif)** :
+  \- De la donnée coté latest data et aucun problèmes
 
-- **Quand le conteneur est DOWN (inactif)** :
-  - Un problème doit etre visible dans le dashboard principal
+\- **Quand le conteneur est DOWN (inactif)** :
+  \- Un problème doit etre visible dans le dashboard principal
 ---
 
 ## Partie 5 : les Notifications Zabbix

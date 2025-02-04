@@ -1,4 +1,4 @@
-#  Introduction à l'Installation de Docker sur Linux et Windows
+# Installation de Docker sur Linux et Windows
 
 ![Tutorial Cover](assets/docker-installation.jpg)
 
