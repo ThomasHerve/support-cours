@@ -191,10 +191,10 @@ Zabbix fonctionne par template. Par defaut vous en avez une grande quantité dis
 
 ### Étape 4.2 : Résultats Attendus
 
-\- **Quand le conteneur est UP (actif)** :  
+- **Quand le conteneur est UP (actif)** :  
   \- De la donnée coté latest data et aucun problèmes  
 
-\- **Quand le conteneur est DOWN (inactif)** :  
+- **Quand le conteneur est DOWN (inactif)** :  
   \- Un problème doit etre visible dans le dashboard principal  
 ---
 
