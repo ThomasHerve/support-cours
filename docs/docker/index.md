@@ -3,4 +3,4 @@
 ## Docker
 
 ### Introduction
-* [TP: Introduction](cours/intro.md): Introduction à docker.
+* [TP: Introduction](cours/installation.md): Installation de docker.

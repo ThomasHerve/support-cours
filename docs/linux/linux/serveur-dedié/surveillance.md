@@ -1,4 +1,4 @@
-# Linus - Surveillance des Conteneurs Docker avec Zabbix
+# Linux - Surveillance des Conteneurs Docker avec Zabbix
 
 ![Tutorial Cover](assets/zabbix-docker.jpg)
 
