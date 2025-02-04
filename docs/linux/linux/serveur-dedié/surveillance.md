@@ -8,16 +8,6 @@ Zabbix est un puissant système de surveillance open-source permettant de suivre
 
 ---
 
-## Pré-requis
-
-Avant de commencer, vous devez avoir :
-
-- Docker et Docker Compose installés sur votre machine.
-- Une connaissance de base du fonctionnement de Docker et Docker Compose.
-- Un conteneur Docker en cours d'exécution à surveiller.
-
----
-
 ## Partie 1 : Installation de Zabbix avec Docker Compose
 
 ### Étape 1.1 : Créer le fichier `docker-compose.yml`
