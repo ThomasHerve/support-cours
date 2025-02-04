@@ -1,1 +1,1 @@
-https://thomasherve.github.io/support-cours/tutorials/
+https://thomasherve.github.io/support-cours/

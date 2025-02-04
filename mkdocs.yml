@@ -72,13 +72,17 @@ extra_javascript:
 
 nav:
   # - Home: 'index.md'
-  - Travaux Pratiques:
-      - 'tutorials/index.md'
+  - Linux:
+      - 'linux/index.md'
       - Linux - serveur dedié:
-        - SSH: 'tutorials/linux/serveur-dedié.md/ssh.md'
-        - Pare feu: 'tutorials/linux/serveur-dedié.md/pare-feu.md'
-        - Services: 'tutorials/linux/serveur-dedié.md/services.md'
-        - Rsyslog: 'tutorials/linux/serveur-dedié.md/rsyslog.md'
-        - Analyse des logs: 'tutorials/linux/serveur-dedié.md/logs.md'
-        - Surveillance: 'tutorials/linux/serveur-dedié.md/surveillance.md'
-        - Sauvegardes: 'tutorials/linux/serveur-dedié.md/sauvegardes.md'
+        - SSH: 'linux/linux/serveur-dedié.md/ssh.md'
+        - Pare feu: 'linux/linux/serveur-dedié.md/pare-feu.md'
+        - Services: 'linux/linux/serveur-dedié.md/services.md'
+        - Rsyslog: 'linux/linux/serveur-dedié.md/rsyslog.md'
+        - Analyse des logs: 'linux/linux/serveur-dedié.md/logs.md'
+        - Surveillance: 'linux/linux/serveur-dedié.md/surveillance.md'
+        - Sauvegardes: 'linux/linux/serveur-dedié.md/sauvegardes.md'
+  - Docker:
+      - 'docker/index.md'
+      - Docker - introduction
+        - Introduction: 'docker/cours/intro.md'
