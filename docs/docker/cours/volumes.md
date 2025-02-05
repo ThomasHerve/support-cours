@@ -1,4 +1,4 @@
-# Linus - Introduction à l'option `-v` de Docker (Volumes)
+# Introduction à l'option `-v` de Docker (Volumes)
 
 ![Tutorial Cover](assets/docker-volumes.jpg)
 

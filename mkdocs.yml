@@ -88,3 +88,4 @@ nav:
         - Introduction: 'docker/cours/installation'
         - Base: 'docker/cours/base'
         - Volume: 'docker/cours/volumes'
+        - Exec: 'docker/cours/exec'
