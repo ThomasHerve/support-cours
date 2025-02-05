@@ -9,11 +9,11 @@ Un **Dockerfile** est un fichier texte contenant une série d’instructions per
 - Les **dépendances** et les **logiciels** nécessaires.
 - Les **commandes exécutées au démarrage**.
 
-Dans ce tutoriel, nous allons :
-1. **Créer un Dockerfile** simple.
-2. **Construire une image Docker** avec ce Dockerfile.
-3. **Lancer un conteneur basé sur cette image**.
-4. **Tester son bon fonctionnement**.
+Dans ce tutoriel, nous allons :  
+1. **Créer un Dockerfile** simple.  
+2. **Construire une image Docker** avec ce Dockerfile.  
+3. **Lancer un conteneur basé sur cette image**.  
+4. **Tester son bon fonctionnement**.  
 
 ---
 
