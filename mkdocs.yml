@@ -86,3 +86,4 @@ nav:
       - 'docker/index.md'
       - Docker - introduction:
         - Introduction: 'docker/cours/installation.md'
+        - Base: 'docker/cours/base.md'
