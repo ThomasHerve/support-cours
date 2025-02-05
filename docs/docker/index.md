@@ -9,3 +9,5 @@
 * [TP: Exec](cours/exec.md): Commande docker exec
 
 ### Création d'image
+* [TP: Dockerfile](cours/dockerfile-intro.md) Création d'une image.
+* [TP: Dockerfile 2](cours/dockerfile-suite.md) Création d'une image web.

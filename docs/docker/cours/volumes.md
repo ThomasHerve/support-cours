@@ -112,12 +112,3 @@ Vous devriez voir :
 3. **Monter le volume** dans le conteneur pour qu'il affiche ce fichier HTML.
 4. **Vérifier que la page affiche bien "Exercice réussi !"**.
 ---
-
-## Conclusion
-
-### Ce que nous avons appris :
-- **Comment utiliser `-v` pour monter un volume** et modifier dynamiquement les fichiers d’un conteneur.
-- **L'impact des volumes** sur la persistance des données dans Docker.
-- **Comment modifier le contenu d’un conteneur sans le redémarrer**.
-
-L’option `-v` est **indispensable** pour la gestion des fichiers dans Docker, que ce soit pour la configuration de services web, la gestion de bases de données ou le stockage de logs.

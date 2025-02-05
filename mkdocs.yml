@@ -89,3 +89,5 @@ nav:
         - Base: 'docker/cours/base'
         - Volume: 'docker/cours/volumes'
         - Exec: 'docker/cours/exec'
+        - Introduction au dockefiles: 'docker/cours/dockerfile-intro'
+        - Dockerfile plus avancé: 'docker/cours/dockerfile-suite.md'

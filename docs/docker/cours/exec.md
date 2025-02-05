@@ -182,13 +182,3 @@ Sortie attendue :
 4. **Lancer un shell interactif dans le conteneur et afficher le contenu du fichier**.
 
 ---
-
-## Conclusion
-
-### Ce que nous avons appris :
-- **Exécuter une commande simple dans un conteneur avec `docker exec`**.
-- **Accéder à un shell interactif dans un conteneur**.
-- **Créer, modifier et vérifier des fichiers à l’intérieur d’un conteneur**.
-- **Lancer un service (ex. Nginx) à l’intérieur d’un conteneur**.
-
-`docker exec` est une commande **puissante** qui vous permet d’interagir avec vos conteneurs **sans les arrêter**, idéale pour le débogage et l’administration système.
