@@ -141,6 +141,11 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
+!!! info
+    Nous pouvons constater deux nouveaux mots clé:
+    COPY: Permet de copier un fichier ou un dossier local **dans l'image**  
+    EXPOSE: Indique que le port doit être ouvert
+
 ### Étape 4.3 : Construire et Lancer l’Image
 ```bash
 docker build -t mon_nginx .
@@ -162,7 +167,7 @@ http://localhost:8080
 
 ### Objectif :
 1. **Créer un Dockerfile** qui génère une image basée sur Debian.
-2. **Installer Apache (`apache2`)** et copier un fichier HTML personnalisé.
+2. **Installer Apache (`apache2`)** et copier un fichier HTML personnalisé dans ce même dockerfile.
 3. **Lancer le conteneur et tester l’accès depuis le navigateur**.
 
 ---
