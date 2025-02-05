@@ -1,14 +1,16 @@
 #  Introduction à l'Installation de Docker sur Linux et Windows
 
+![Tutorial Cover](assets/docker-base.jpg)
+
 ## Partie 1: Docker c'est quoi en fait ?
 
 Docker permet d'empacter ses applications sous forme d'image et de les partager à n'importe qui. Imaginez cela comme un .exe d'un windows, à la difference que l'image peut tourner n'importe où et que vous embarquez pas juste du code source, mais tout un système ! cela permet de déployer une base de donnée en quelque secondes par exemple, vous épargnant une longue installation et une potentiel pollution de votre système, car les conteneurs dockers sont completement isolés, exit fichiers d'installations et autres clé de registres.
 
-1. Les images
+\1. Les images
 
 Les images sont tout simplement le "binaire". C'est à dire que vous pouvez les télécharger ou les publier, mais en tant que tel ce n'est que de la donnée.
 
-1. Les conteneurs
+\2. Les conteneurs
 
 Un conteneur est l'execution d'une image. Vous pouvez ensuite interagir avec comme nous allons voir dans la suite de ce cours.
 
@@ -24,6 +26,12 @@ Vous pouvez télécharger l'image d'exemple que nous allons executer dans la sui
 docker pull sevenajay/mario
 ```
 
+Il est possible de téléchargé une version spécifique d'une image de cette manière, on appelle ces dernières des `tag`:
+
+```bash
+docker pull <NOM IMAGE>:<TAG>
+```
+
 ### Étape 2.2 : Listez vos images
 
 Vous pouvez voir vos images téléchargés grâce à 
@@ -31,7 +39,8 @@ Vous pouvez voir vos images téléchargés grâce à
 docker image ls
 ```
 
-- Exercice: Allez sur docker hub et trouvez une image nginx. Téléchargez là et trouvez là dans la liste de vos images.
+- Exercice: Allez sur docker hub et trouvez une image mysql. Téléchargez là et trouvez là dans la liste de vos images.
+- Exercice: Trouvez comment pull spécifiquement l'image de mysql 5. Téléchargez là et trouvez là dans la liste de vos images.
 
 ## Partie 3: executer un conteneur
 
@@ -64,3 +73,37 @@ docker run -p 8080:80 sevenajay/mario
 connectez vous à `localhost:8080` dans votre navigateur pour constater que le jeu apparait (Aller vous avez bien droit à une petite partie avant de passer à la suite).
 
 - Exercice: Faite tourner le jeu sur un autre port que le port 8080. 
+
+### Étape 3.3 : execution en arrière plan
+
+Vous pouvez executer une image en arrière plan avec l'option `-d`.  
+
+- Exercice: Executez l'image mario en arrière plan.
+
+
+### Étape 3.3 : liste, arret reprise et suppression
+
+Vous pouvez lister les conteneurs tournant sur votre machine avec:  
+
+```bash
+docker ps
+```
+
+Vous pouvez stopper un conteneur de cette manière:
+
+```bash
+docker stop <NOM OU ID DU CONTENEUR>
+```
+
+Vous pouvez relancer un conteneur stoppé avec:  
+
+```bash
+docker start <NOM OU ID DU CONTENEUR>
+```
+
+Vous pouvez supprimer un conteneur stoppé avec:
+```bash
+docker rm <NOM OU ID DU CONTENEUR>
+```
+
+- Exercice: Stoppez, relancez puis supprimés le conteneur mario, en constatant l'accessibilité dans votre navigateur à chaque étape.
