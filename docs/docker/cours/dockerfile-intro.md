@@ -1,4 +1,4 @@
-# Linus - Introduction à l'Écriture d'un Dockerfile
+# Introduction à l'Écriture d'un Dockerfile
 
 ![Tutorial Cover](assets/dockerfile.jpg)
 
