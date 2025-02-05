@@ -35,11 +35,11 @@ RUN apt update && apt install -y curl
 CMD ["echo", "Hello depuis mon conteneur personnalisé !"]
 ```
 
-Explication des instructions :
-- `FROM ubuntu:latest` → Utilise **Ubuntu** comme image de base.
-- `LABEL maintainer="Votre Nom"` → Ajoute une **étiquette** avec les informations de l’auteur.
-- `RUN apt update && apt install -y curl` → Met à jour le système et installe **curl**.
-- `CMD ["echo", "Hello depuis mon conteneur personnalisé !"]` → Affiche un message par défaut.
+Explication des instructions :  
+- `FROM ubuntu:latest` → Utilise **Ubuntu** comme image de base.  
+- `LABEL maintainer="Votre Nom"` → Ajoute une **étiquette** avec les informations de l’auteur.  
+- `RUN apt update && apt install -y curl` → Met à jour le système et installe **curl**.  
+- `CMD ["echo", "Hello depuis mon conteneur personnalisé !"]` → Affiche un message par défaut.  
 
 ---
 
@@ -142,7 +142,7 @@ CMD ["nginx", "-g", "daemon off;"]
 ```
 
 !!! info
-    Nous pouvons constater deux nouveaux mots clé:
+    Nous pouvons constater deux nouveaux mots clé:  
     COPY: Permet de copier un fichier ou un dossier local **dans l'image**  
     EXPOSE: Indique que le port doit être ouvert
 
