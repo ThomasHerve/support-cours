@@ -87,3 +87,4 @@ nav:
       - Docker - introduction:
         - Introduction: 'docker/cours/installation'
         - Base: 'docker/cours/base'
+        - Volume: 'docker/cours/volumes'

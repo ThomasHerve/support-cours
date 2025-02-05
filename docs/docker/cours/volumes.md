@@ -31,12 +31,6 @@ docker run -p 8080:80 --name nginx_no_volume nginx
 !!! info
     Ouvrez votre navigateur et allez à **http://localhost:8080**. Vous devriez voir la **page par défaut de Nginx**.
 
-Vous pouvez également tester avec :
-```bash
-curl -I http://localhost:8080
-```
-Cela renverra une réponse HTTP `200 OK` confirmant que Nginx fonctionne.
-
 ---
 
 ## Partie 2 : Remplacer le HTML par un Contenu Personnalisé avec `-v`
@@ -45,9 +39,9 @@ Nous allons maintenant utiliser un volume pour **remplacer la page par défaut d
 
 ### Étape 2.1 : Créer un Dossier et un Fichier HTML
 
-Sur votre machine hôte, créez un dossier pour contenir notre page HTML personnalisée :
+Sur votre ordinateur, créez un dossier pour contenir notre page HTML personnalisée:
 ```bash
-mkdir -p ~/docker/nginx_html
+mkdir -p <CHEMIN>/nginx_html
 ```
 
 Créez un fichier `index.html` à l’intérieur :
@@ -59,16 +53,17 @@ echo "<h1>Bienvenue sur mon site personnalisé !</h1>" > ~/docker/nginx_html/ind
 
 Arrêtez et supprimez l'ancien conteneur :
 ```bash
-docker stop nginx_no_volume && docker rm nginx_no_volume
+docker stop nginx_no_volume  
+docker rm nginx_no_volume
 ```
 
 Lancez un nouveau conteneur Nginx en **montant notre dossier** en tant que volume :
 ```bash
-docker run -d -p 8080:80 --name nginx_with_volume -v ~/docker/nginx_html:/usr/share/nginx/html nginx
+docker run -d -p 8080:80 --name nginx_with_volume -v <CHEMIN>/nginx_html:/usr/share/nginx/html nginx
 ```
 
 Explication :
-- `-v ~/docker/nginx_html:/usr/share/nginx/html` : Monte notre dossier local (`~/docker/nginx_html`) à la place du dossier par défaut de Nginx (`/usr/share/nginx/html`).
+- `-v <CHEMIN>/nginx_html:/usr/share/nginx/html` : Monte notre dossier local (`<CHEMIN>/nginx_html`) à la place du dossier par défaut de Nginx (`/usr/share/nginx/html`).
 
 ### Étape 2.3 : Vérifier que la page a changé
 
@@ -102,10 +97,6 @@ echo "<h1>Page mise à jour avec succès !</h1>" > ~/docker/nginx_html/index.htm
 !!! info
     Actualisez **http://localhost:8080**. La modification est immédiatement visible, sans redémarrer le conteneur.
 
-Vous pouvez aussi vérifier avec :
-```bash
-curl http://localhost:8080
-```
 Vous devriez voir :
 ```html
 <h1>Page mise à jour avec succès !</h1>
@@ -120,27 +111,6 @@ Vous devriez voir :
 2. **Créer un volume** contenant un fichier HTML (`index.html`) avec le texte **"Exercice réussi !"**.
 3. **Monter le volume** dans le conteneur pour qu'il affiche ce fichier HTML.
 4. **Vérifier que la page affiche bien "Exercice réussi !"**.
-
-### Solution
-
-1. **Créer le dossier et le fichier HTML** :
-   ```bash
-   mkdir -p ~/docker/nginx_test
-   echo "<h1>Exercice réussi !</h1>" > ~/docker/nginx_test/index.html
-   ```
-
-2. **Lancer le conteneur avec le volume** :
-   ```bash
-   docker run -d -p 9090:80 --name nginx_test_volume -v ~/docker/nginx_test:/usr/share/nginx/html nginx
-   ```
-
-3. **Tester l'affichage** :
-   - Allez sur **http://localhost:9090** et vérifiez que vous voyez **"Exercice réussi !"**.
-   - Ou utilisez :
-     ```bash
-     curl http://localhost:9090
-     ```
-
 ---
 
 ## Conclusion
