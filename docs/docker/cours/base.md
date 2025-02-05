@@ -50,9 +50,9 @@ docker run hello-world
 
 ### Étape 3.2 : Mapping de ports
 
-Bon en l'état votre conteneur ne pourra pas faire grand chose, en général nous voulons pouvoir acceder à l'application qui tourne dedans via un port. Par exemple quand vous dévéloppez dans un framework, vous allez executer une commande pour faire tourner votre site web et y acceder via localhost:\<PORT UTILISE PAR LE FRAMEWORK\>.  
+Bon en l'état votre conteneur ne pourra pas faire grand chose, en général nous voulons pouvoir acceder à l'application qui tourne dedans via un port. Par exemple quand vous dévéloppez dans un framework, vous allez executer une commande pour faire tourner votre site web et y acceder via `localhost:<PORT UTILISE PAR LE FRAMEWORK>`.  
 
-Nous pouvons donc utilisr le **mapping de ports**.  
+Nous pouvons donc utiliser le **mapping de ports**.  
 Le concept est simple: lié un port de votre conteneur à votre ordinateur. pour ce faire nous utilisons l'option `-p <NUMERO PORT ORDINATEUR>:<NUMERO PORT CONTENEUR>`.  
 
 Prenons pour exemple l'image téléchargé précedemment. C'est une reproduction du jeu mario bros développé en javascript et fait pour tourner dans un navigateur, de base sur le port **80**. Exécutez la de cette manière:
