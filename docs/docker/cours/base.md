@@ -2,13 +2,13 @@
 
 ## Partie 1: Docker c'est quoi en fait ?
 
-Docker permet d'empacter ses applications sous forme d'image et de les partager à n'importe qui. Imaginez cela comme un .exe d'un windows, à la difference que l'image peut tourner n'importe où et que vous embarquer pas juste du code source, mais tout un système ! cela permet de déployer une base de donnée en quelque secondes par exemple, vous épargnant une longue installation et une potentiel pollution de votre système, car les conteneurs dockers sont completement isolés, exit fichiers d'installations et autres clé de registres.
+Docker permet d'empacter ses applications sous forme d'image et de les partager à n'importe qui. Imaginez cela comme un .exe d'un windows, à la difference que l'image peut tourner n'importe où et que vous embarquez pas juste du code source, mais tout un système ! cela permet de déployer une base de donnée en quelque secondes par exemple, vous épargnant une longue installation et une potentiel pollution de votre système, car les conteneurs dockers sont completement isolés, exit fichiers d'installations et autres clé de registres.
 
 1. Les images
 
 Les images sont tout simplement le "binaire". C'est à dire que vous pouvez les télécharger ou les publier, mais en tant que tel ce n'est que de la donnée.
 
-2. Les conteneurs
+1. Les conteneurs
 
 Un conteneur est l'execution d'une image. Vous pouvez ensuite interagir avec comme nous allons voir dans la suite de ce cours.
 
@@ -26,7 +26,7 @@ docker pull sevenajay/mario
 
 ### Étape 2.2 : Listez vos images
 
-Vous pouvez voir vos images téléchargé grace à 
+Vous pouvez voir vos images téléchargés grâce à 
 ```bash
 docker image ls
 ```
@@ -50,15 +50,17 @@ docker run hello-world
 
 ### Étape 3.2 : Mapping de ports
 
-Bon en l'état votre conteneur ne pourra pas faire grand chose, en général nous voulons pouvoir acceder à l'application qui tourne dedans via un port. Par exemple quand vous dévéloppez dans un framework, vous allez executer une commande pour faire tourner votre site web et y acceder via localhost:<PORT UTILISE PAR LE FRAMEWORK>.  
+Bon en l'état votre conteneur ne pourra pas faire grand chose, en général nous voulons pouvoir acceder à l'application qui tourne dedans via un port. Par exemple quand vous dévéloppez dans un framework, vous allez executer une commande pour faire tourner votre site web et y acceder via localhost:\<PORT UTILISE PAR LE FRAMEWORK\>.  
 
 Nous pouvons donc utilisr le **mapping de ports**.  
 Le concept est simple: lié un port de votre conteneur à votre ordinateur. pour ce faire nous utilisons l'option `-p <NUMERO PORT ORDINATEUR>:<NUMERO PORT CONTENEUR>`.  
 
-Prenons pour exemple l'image téléchargé précedemment. C'est une reproduction du jeu mario bros développé en javascript et fait pour tourner dans un navigateur. Exécutez le de cette manière:
+Prenons pour exemple l'image téléchargé précedemment. C'est une reproduction du jeu mario bros développé en javascript et fait pour tourner dans un navigateur, de base sur le port **80**. Exécutez la de cette manière:
 
 ```bash
 docker run -p 8080:80 sevenajay/mario
 ```
 
 connectez vous à `localhost:8080` dans votre navigateur pour constater que le jeu apparait (Aller vous avez bien droit à une petite partie avant de passer à la suite).
+
+- Exercice: Faite tourner le jeu sur un autre port que le port 8080. 
