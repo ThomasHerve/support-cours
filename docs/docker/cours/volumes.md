@@ -107,7 +107,7 @@ Vous devriez voir :
 ## Exercice Pratique
 
 ### Objectif :
-1. **Créer un nouveau conteneur Nginx** nommé `nginx_test_volume`.
+1. **Créer un nouveau conteneur Nginx** nommé `nginx_test_volume`, tournant sur le port 8081.
 2. **Créer un volume** contenant un fichier HTML (`index.html`) avec le texte **"Exercice réussi !"**.
 3. **Monter le volume** dans le conteneur pour qu'il affiche ce fichier HTML.
 4. **Vérifier que la page affiche bien "Exercice réussi !"**.
