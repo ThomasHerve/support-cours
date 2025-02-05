@@ -6,13 +6,13 @@
 
 Docker permet d'empacter ses applications sous forme d'image et de les partager à n'importe qui. Imaginez cela comme un .exe d'un windows, à la difference que l'image peut tourner n'importe où et que vous embarquez pas juste du code source, mais tout un système ! cela permet de déployer une base de donnée en quelque secondes par exemple, vous épargnant une longue installation et une potentiel pollution de votre système, car les conteneurs dockers sont completement isolés, exit fichiers d'installations et autres clé de registres.
 
-\1. Les images
+1. Les images
 
-Les images sont tout simplement le "binaire". C'est à dire que vous pouvez les télécharger ou les publier, mais en tant que tel ce n'est que de la donnée.
+    Les images sont tout simplement le "binaire". C'est à dire que vous pouvez les télécharger ou les publier, mais en tant que tel ce n'est que de la donnée.
 
-\2. Les conteneurs
+2. Les conteneurs
 
-Un conteneur est l'execution d'une image. Vous pouvez ensuite interagir avec comme nous allons voir dans la suite de ce cours.
+    Un conteneur est l'execution d'une image. Vous pouvez ensuite interagir avec comme nous allons voir dans la suite de ce cours.
 
 
 ## Partie 2: Les images
@@ -106,4 +106,4 @@ Vous pouvez supprimer un conteneur stoppé avec:
 docker rm <NOM OU ID DU CONTENEUR>
 ```
 
-- Exercice: Stoppez, relancez puis supprimés le conteneur mario, en constatant l'accessibilité dans votre navigateur à chaque étape.
+- Exercice: Stoppez, relancez puis supprimez le conteneur mario, en constatant l'accessibilité dans votre navigateur à chaque étape.
