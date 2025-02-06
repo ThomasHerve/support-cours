@@ -1,6 +1,6 @@
 # Linux - Configuration et Utilisation de Rsyslog
 
-![Tutorial Cover](assets/rsyslog.jpg)
+![Tutorial Cover](assets/rsyslog.png)
 
 ## Introduction
 
@@ -19,7 +19,7 @@ Rsyslog est un démon puissant et flexible pour la gestion des journaux système
 
 ## Partie 1 : Utilisation via docker
 
-Nous allons maintenant faire un maximum de choses via docker, car pour les étudiants sur windows et mac les outils que nous allins voir ne peuvent tout simplement pas fonctionner.
+Nous allons maintenant faire un maximum de choses via docker, car pour les étudiants sur windows et mac les outils que nous allons voir ne peuvent tout simplement pas fonctionner.
 
 ### Étape 1.1 : Installer docker si non présent sur votre système
 

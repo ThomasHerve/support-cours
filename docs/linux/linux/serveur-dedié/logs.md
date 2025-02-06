@@ -1,6 +1,6 @@
 # Linux - Analyse des Logs de Sécurité avec Auth.log
 
-![Tutorial Cover](assets/authlog-syslog.jpg)
+![Tutorial Cover](assets/logs.webp)
 
 ## Introduction
 
