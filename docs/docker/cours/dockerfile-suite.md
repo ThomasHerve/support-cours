@@ -136,9 +136,9 @@ Vous devriez voir l'application Angular fonctionner !
 ## Exercice Pratique
 
 ### Objectif
-1. **Créer une variante du Dockerfile** qui utilise `http-server` (au lieu de Nginx).
+1. **Créer un autre Dockerfile** qui utilise un framework web d'un autre language (python, php, java, etc) (Vous devez aussi récupérer des sources, que ce soit le projet par defaut ou un projet sur lequel vous avez déjà travaillé).
 2. **Construire et exécuter l’image**.
-3. **Tester si l’application s’affiche toujours sur `http://localhost:8081`**.
+3. **Tester si l’application s’affiche sur `http://localhost:8081`**.
 
 ---
 

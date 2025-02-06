@@ -222,16 +222,6 @@ Vous pouvez planifier une sauvegarde automatique avec **cron**.
 !!! info 
     Cette tâche enregistrera une copie de la base de données deux fois par jour.
 
-- Exercice: Ajoutez un conteneur qui execute ce cron toute les minutes et constatez sa bonne execution
+## Exercice Pratique
 
----
-
-## Conclusion
-
-🎯 **Résumé des étapes** :
-1. Déploiement d’un environnement Docker avec une base MySQL et une application web.  
-2. Mise en place d’un conteneur de sauvegarde avec `mysqldump`.  
-3. Sauvegarde et restauration manuelle des données.  
-4. Automatisation des sauvegardes avec cron.  
-
-Cette approche garantit la sécurité des données et permet une restauration rapide en cas d’incident. 🚀
+1. Ajoutez un conteneur qui créé un backup toute les minutes et constatez sa bonne execution

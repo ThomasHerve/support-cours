@@ -214,6 +214,3 @@ sudo iptables -P INPUT ACCEPT
 
 ---
 
-## Conclusion
-
-Vous avez maintenant une configuration fonctionnelle des pare-feu UFW et iptables. Testez toujours vos règles sur `localhost` avant de les appliquer à un environnement en production pour éviter de vous bloquer hors de votre système.

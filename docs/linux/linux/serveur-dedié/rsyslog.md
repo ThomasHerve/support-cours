@@ -271,6 +271,3 @@ Consultez les logs reçus :
 
 Vous devriez voir apparaître votre message envoyé depuis le client.
 
-## Conclusion
-
-Rsyslog est un outil puissant et polyvalent pour gérer et analyser les journaux système. Il peut être utilisé localement pour organiser les logs ou à grande échelle pour centraliser les journaux dans un environnement distribué. En combinant ses fonctionnalités avec des outils comme ElasticSearch, Rsyslog devient un pilier pour la surveillance et l’analyse des systèmes. 

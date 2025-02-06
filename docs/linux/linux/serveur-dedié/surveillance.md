@@ -213,8 +213,4 @@ Nous n'allons pas couvrir cette partie dans le cours car nous ne sommes pas équ
 3. Configurez un template pertinent pour ce service (par exemple, **Template App Redis** pour Redis ou **Template App HTTP** pour Apache).
 4. Testez la surveillance de ce service en démarrant et en arrêtant le conteneur.
 
----
 
-## Conclusion
-
-Dans ce tutoriel, nous avons configuré Zabbix pour surveiller un conteneur Docker exécutant un service, utilisé Docker Compose pour gérer les services et testé la surveillance de l'état de l'hôte via Zabbix. Vous avez appris à configurer des hôtes, ajouter des templates et tester la surveillance en simulant des pannes. Zabbix est un outil puissant pour centraliser la surveillance de vos conteneurs et services.
