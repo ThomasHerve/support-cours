@@ -163,7 +163,6 @@ Les modifications d’iptables ne sont pas persistantes par défaut. Pour sauveg
    ```
 
 2. **Restaurer les règles au démarrage** :
-   Ajoutez cette ligne dans `/etc/rc.local` :
    ```bash
    iptables-restore < /etc/iptables.rules
    ```

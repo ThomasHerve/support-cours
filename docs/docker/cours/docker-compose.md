@@ -245,4 +245,4 @@ Vous devriez voir le contenu de la page html. Nous constatons donc que depuis un
 
 ### Exercice 1
 1. **Créez un service du framework backend de votre choix**. 
-    Ce dernier doit pouvoir se connecter à la base de donnée et repondre à des requetes
+    Ce dernier doit pouvoir se connecter à la base de donnée et repondre à des requetes REST (exemple: express, fastapi, symfony...)
