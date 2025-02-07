@@ -247,7 +247,7 @@ Rappel: rsyslog-server est une **url**, cette dernière est le nom du serveur su
 1. Accédez au conteneur client :
 
    ```bash
-   docker exec -it rsyslog-client bash
+   docker exec -it rsyslog-client sh
 
    ```
 2. Générez un log avec la commande logger :
@@ -260,7 +260,7 @@ Rappel: rsyslog-server est une **url**, cette dernière est le nom du serveur su
 Accédez au conteneur serveur :
 
    ```bash
-   docker exec -it rsyslog-server bash
+   docker exec -it rsyslog-server sh
    ```
 
 Consultez les logs reçus :
