@@ -1,6 +1,6 @@
 # Linux - Surveillance des Conteneurs Docker avec Zabbix
 
-![Tutorial Cover](assets/zabbix-docker.jpg)
+![Tutorial Cover](assets/zabbix.png)
 
 ## Introduction
 
