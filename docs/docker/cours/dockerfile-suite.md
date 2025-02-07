@@ -1,4 +1,4 @@
-# Linus - Dockerisation d'un Projet Angular
+# Dockerisation d'un Projet Angular
 
 ![Tutorial Cover](assets/docker-angular.jpg)
 

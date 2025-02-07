@@ -11,3 +11,6 @@
 ### Création d'image
 * [TP: Dockerfile](cours/dockerfile-intro.md) Création d'une image.
 * [TP: Dockerfile 2](cours/dockerfile-suite.md) Création d'une image web.
+
+### Docker compose
+* [TP: Docker compose](cours/docker-compose.md) Introduction à docker compose.
