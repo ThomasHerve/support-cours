@@ -96,7 +96,7 @@ services:
 
 ### Étape 2.1 : Détection de Connexions SSH
 
-1. Points à analyser :
+1. Points à analyser :  
    \- **Connexions réussies** :
      ```text
      Accepted password for <user> from <IP> port <port> ssh2
