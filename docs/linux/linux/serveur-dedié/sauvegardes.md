@@ -1,6 +1,6 @@
 # Linux - Stratégies de Sauvegarde dans Linux avec Docker Compose
 
-![Tutorial Cover](assets/backup-strategies.jpg)
+![Tutorial Cover](assets/backup.jpeg)
 
 ## Introduction
 
