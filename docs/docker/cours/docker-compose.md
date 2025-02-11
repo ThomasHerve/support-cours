@@ -224,9 +224,9 @@ services:
 volumes:
   mysql_data:
 ```
-Explication :
-- **Ajout d'un service `curl`**.
-- **command: `sleep infinity`** permet de faire en sorte que le conteneur reste en vie.
+Explication :  
+\- **Ajout d'un service `curl`**.  
+\- **command: `sleep infinity`** permet de faire en sorte que le conteneur reste en vie.  
 
 ### Étape 6.2 : interroger le conteneur `web`
 
