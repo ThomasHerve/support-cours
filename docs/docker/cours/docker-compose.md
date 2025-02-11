@@ -72,10 +72,10 @@ services:
       - ./html:/usr/share/nginx/html
 ```
 
-Explication :
-\- **Définit un service `web`** basé sur l’image `nginx:latest`.
-\- **Mappe le port `8080`** du PC vers le port `80` du conteneur.
-\- **Monte le dossier `html/`** dans `/usr/share/nginx/html` pour servir notre page.
+Explication :  
+\- **Définit un service `web`** basé sur l’image `nginx:latest`.  
+\- **Mappe le port `8080`** du PC vers le port `80` du conteneur.  
+\- **Monte le dossier `html/`** dans `/usr/share/nginx/html` pour servir notre page.  
 
 !!! info
     la commande docker equivalente serait `docker run -p 8080:80 -v ./html:/usr/share/nginx/html nginx:latest`
@@ -89,7 +89,7 @@ Dans le dossier contenant `docker-compose.yml`, exécutez :
 ```bash
 docker compose up -d
 ```
-Explication :
+Explication :  
 \- `-d` → Exécute en **mode détaché** (en arrière-plan).
 
 !!! info
@@ -164,10 +164,10 @@ volumes:
   mysql_data:
 ```
 
-Explication :
-\- **Ajout d'un service `db`** basé sur MySQL 5.7.
-\- **Configuration des variables d'environnement** (mot de passe, utilisateur...).
-\- **Ajout d'un volume nommé `mysql_data`** pour **stocker les données** de manière persistante.
+Explication :  
+\- **Ajout d'un service `db`** basé sur MySQL 5.7.  
+\- **Configuration des variables d'environnement** (mot de passe, utilisateur...).  
+\- **Ajout d'un volume nommé `mysql_data`** pour **stocker les données** de manière persistante.  
 
 ### Étape 5.2 : Relancer Docker Compose
 ```bash
