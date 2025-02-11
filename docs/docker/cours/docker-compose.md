@@ -90,7 +90,7 @@ Dans le dossier contenant `docker-compose.yml`, exécutez :
 docker compose up -d
 ```
 Explication :
-- `-d` → Exécute en **mode détaché** (en arrière-plan).
+\- `-d` → Exécute en **mode détaché** (en arrière-plan).
 
 !!! info
     Pour voir les logs des conteneurs en temps réel, utilisez `docker compose logs -f`.
@@ -165,9 +165,9 @@ volumes:
 ```
 
 Explication :
-- **Ajout d'un service `db`** basé sur MySQL 5.7.
-- **Configuration des variables d'environnement** (mot de passe, utilisateur...).
-- **Ajout d'un volume nommé `mysql_data`** pour **stocker les données** de manière persistante.
+\- **Ajout d'un service `db`** basé sur MySQL 5.7.
+\- **Configuration des variables d'environnement** (mot de passe, utilisateur...).
+\- **Ajout d'un volume nommé `mysql_data`** pour **stocker les données** de manière persistante.
 
 ### Étape 5.2 : Relancer Docker Compose
 ```bash
