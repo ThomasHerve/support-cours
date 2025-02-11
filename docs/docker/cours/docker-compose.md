@@ -73,9 +73,9 @@ services:
 ```
 
 Explication :
-- **Définit un service `web`** basé sur l’image `nginx:latest`.
-- **Mappe le port `8080`** du PC vers le port `80` du conteneur.
-- **Monte le dossier `html/`** dans `/usr/share/nginx/html` pour servir notre page.
+\- **Définit un service `web`** basé sur l’image `nginx:latest`.
+\- **Mappe le port `8080`** du PC vers le port `80` du conteneur.
+\- **Monte le dossier `html/`** dans `/usr/share/nginx/html` pour servir notre page.
 
 !!! info
     la commande docker equivalente serait `docker run -p 8080:80 -v ./html:/usr/share/nginx/html nginx:latest`
