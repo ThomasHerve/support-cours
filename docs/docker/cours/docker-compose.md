@@ -246,3 +246,7 @@ Vous devriez voir le contenu de la page html. Nous constatons donc que depuis un
 ### Exercice 1
 1. **Créez un service du framework backend de votre choix**. 
     Ce dernier doit pouvoir se connecter à la base de donnée et repondre à des requetes REST (exemple: express, fastapi, symfony...)
+2. **Modifiez le contenu HTML pour interroger votre backend**
+
+!!! info
+    Cette exercice est volontairement très libre, vous pouvez implémenter la ou les fonctionnalités backend que vous voulez, tant qu'elle interragissent avec la base de donnée et que vous pouvez interroger votre backend depuis la page web.
