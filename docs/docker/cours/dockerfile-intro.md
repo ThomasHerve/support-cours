@@ -69,9 +69,9 @@ CMD ["echo", "Hello depuis mon conteneur personnalisé !"]
 docker build -t mon_image_personnalisee .
 ```
 
-Explication :
-- `-t mon_image_personnalisee` → Donne un nom à l’image (`mon_image_personnalisee`).
-- `.` → Utilise le **Dockerfile** dans le dossier actuel.
+Explication :  
+- `-t mon_image_personnalisee` → Donne un nom à l’image (`mon_image_personnalisee`).  
+- `.` → Utilise le **Dockerfile** dans le dossier actuel.  
 
 !!! info
     Vous verrez plusieurs étapes s’exécuter lors de la construction de l’image.
