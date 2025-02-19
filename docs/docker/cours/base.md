@@ -81,7 +81,7 @@ Vous pouvez executer une image en arrière plan avec l'option `-d`.
 - Exercice: Executez l'image mario en arrière plan.
 
 
-### Étape 3.3 : liste, arret reprise et suppression
+### Étape 3.4 : liste, arret reprise et suppression
 
 Vous pouvez lister les conteneurs tournant sur votre machine avec:  
 
