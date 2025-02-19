@@ -4,10 +4,10 @@
 
 ## Introduction
 
-Un **Dockerfile** est un fichier texte contenant une série d’instructions permettant de **créer une image Docker personnalisée**. Il définit tout ce dont un conteneur a besoin pour fonctionner, comme :
-- Le **système de base** (ex. Debian, Ubuntu, Alpine...).
-- Les **dépendances** et les **logiciels** nécessaires.
-- Les **commandes exécutées au démarrage**.
+Un **Dockerfile** est un fichier texte contenant une série d’instructions permettant de **créer une image Docker personnalisée**. Il définit tout ce dont un conteneur a besoin pour fonctionner, comme :  
+- Le **système de base** (ex. Debian, Ubuntu, Alpine...).  
+- Les **dépendances** et les **logiciels** nécessaires.  
+- Les **commandes exécutées au démarrage**.  
 
 Dans ce tutoriel, nous allons :  
 1. **Créer un Dockerfile** simple.  
