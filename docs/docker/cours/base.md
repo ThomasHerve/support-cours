@@ -1,6 +1,6 @@
 #  Introduction à l'Installation de Docker sur Linux et Windows
 
-![Tutorial Cover](assets/docker-base.jpg)
+![Tutorial Cover](assets/docker-base.png)
 
 ## Partie 1: Docker c'est quoi en fait ?
 
