@@ -1,0 +1,814 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+    
+    
+      
+        <title>Introduction à la commande docker exec - Cours DevOps et Linux</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-a-la-commande-docker-exec" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Cours DevOps et Linux" class="md-header__button md-logo" aria-label="Cours DevOps et Linux" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 22v-2h3v-3h2v3.5c0 .39-.16.74-.46 1.04s-.65.46-1.04.46zM7 22H3.5c-.39 0-.74-.16-1.04-.46S2 20.89 2 20.5V17h2v3h3zM17 2h3.5c.39 0 .74.16 1.04.46s.46.65.46 1.04V7h-2V4h-3zM7 2v2H4v3H2V3.5c0-.39.16-.74.46-1.04S3.11 2 3.5 2zm6 15.25 4-2.3v-4.59l-4 2.3zm-1-6.33 4-2.29-4-2.35-4 2.35zm-5 4.03 4 2.3v-4.59l-4-2.3zm11.23-7.36c.5.32.77.75.77 1.32v6.32c0 .57-.27 1-.77 1.32l-5.48 3.18q-.75.48-1.5 0l-5.48-3.18c-.5-.32-.77-.75-.77-1.32V8.91c0-.57.27-1 .77-1.32l5.48-3.18c.25-.13.5-.19.75-.19s.5.06.75.19z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cours DevOps et Linux
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction à la commande docker exec
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../linux/" class="md-tabs__link">
+          
+  
+    
+  
+  Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  Docker
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Cours DevOps et Linux" class="md-nav__button md-logo" aria-label="Cours DevOps et Linux" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 22v-2h3v-3h2v3.5c0 .39-.16.74-.46 1.04s-.65.46-1.04.46zM7 22H3.5c-.39 0-.74-.16-1.04-.46S2 20.89 2 20.5V17h2v3h3zM17 2h3.5c.39 0 .74.16 1.04.46s.46.65.46 1.04V7h-2V4h-3zM7 2v2H4v3H2V3.5c0-.39.16-.74.46-1.04S3.11 2 3.5 2zm6 15.25 4-2.3v-4.59l-4 2.3zm-1-6.33 4-2.29-4-2.35-4 2.35zm-5 4.03 4 2.3v-4.59l-4-2.3zm11.23-7.36c.5.32.77.75.77 1.32v6.32c0 .57-.27 1-.77 1.32l-5.48 3.18q-.75.48-1.5 0l-5.48-3.18c-.5-.32-.77-.75-.77-1.32V8.91c0-.57.27-1 .77-1.32l5.48-3.18c.25-.13.5-.19.75-.19s.5.06.75.19z"/></svg>
+
+    </a>
+    Cours DevOps et Linux
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../linux/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Linux
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Docker
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partie-1-lancer-un-conteneur-pour-les-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 1 : Lancer un Conteneur pour les Tests
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 1 : Lancer un Conteneur pour les Tests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-11-demarrer-un-conteneur-ubuntu-en-arriere-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 1.1 : Démarrer un conteneur Ubuntu en arrière-plan
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-12-verifier-que-le-conteneur-est-bien-en-cours-dexecution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 1.2 : Vérifier que le conteneur est bien en cours d’exécution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partie-2-executer-une-commande-dans-un-conteneur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 2 : Exécuter une Commande dans un Conteneur
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 2 : Exécuter une Commande dans un Conteneur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-21-verifier-la-version-dubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 2.1 : Vérifier la version d’Ubuntu
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-22-lister-les-fichiers-dans-le-conteneur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 2.2 : Lister les fichiers dans le conteneur
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partie-3-acceder-a-un-shell-interactif" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 3 : Accéder à un Shell Interactif
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 3 : Accéder à un Shell Interactif">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-31-ouvrir-un-terminal-dans-le-conteneur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 3.1 : Ouvrir un terminal dans le conteneur
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-32-quitter-le-conteneur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 3.2 : Quitter le conteneur
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partie-4-verifier-et-modifier-un-fichier-dans-un-conteneur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 4 : Vérifier et Modifier un Fichier dans un Conteneur
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 4 : Vérifier et Modifier un Fichier dans un Conteneur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-41-creer-un-fichier-dans-le-conteneur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 4.1 : Créer un fichier dans le conteneur
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-42-verifier-que-le-fichier-existe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 4.2 : Vérifier que le fichier existe
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partie-5-lancer-un-service-dans-un-conteneur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 5 : Lancer un Service dans un Conteneur
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 5 : Lancer un Service dans un Conteneur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-51-installer-nginx-dans-le-conteneur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 5.1 : Installer nginx dans le conteneur
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-52-demarrer-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 5.2 : Démarrer nginx
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-53-verifier-que-nginx-fonctionne" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 5.3 : Vérifier que nginx fonctionne
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercice-pratique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercice Pratique
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercice Pratique">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif :
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="introduction-a-la-commande-docker-exec">Introduction à la commande <code>docker exec</code></h1>
+<p><img alt="Tutorial Cover" src="assets/docker-exec.jpg" /></p>
+<h2 id="introduction">Introduction</h2>
+<p>La commande <code>docker exec</code> permet <strong>d’exécuter une commande dans un conteneur en cours d’exécution</strong>. Cela est particulièrement utile pour <strong>interagir avec un conteneur sans avoir à l’arrêter ou le redémarrer</strong>, pour <strong>déboguer une application</strong>, ou encore pour <strong>exécuter des tâches d’administration</strong> à l’intérieur d’un conteneur.</p>
+<p>Dans ce tutoriel, nous allons voir comment utiliser <code>docker exec</code> avec plusieurs cas pratiques, notamment :
+- Exécuter des commandes simples.
+- Accéder à un shell interactif.
+- Vérifier et modifier un fichier dans un conteneur.
+- Lancer un service ou un processus dans un conteneur.</p>
+<hr />
+<h2 id="partie-1-lancer-un-conteneur-pour-les-tests">Partie 1 : Lancer un Conteneur pour les Tests</h2>
+<p>Avant de pouvoir utiliser <code>docker exec</code>, nous devons d'abord <strong>avoir un conteneur en cours d’exécution</strong>. </p>
+<p>Nous allons utiliser l’image officielle <strong>Ubuntu</strong> pour nos tests.</p>
+<h3 id="etape-11-demarrer-un-conteneur-ubuntu-en-arriere-plan">Étape 1.1 : Démarrer un conteneur Ubuntu en arrière-plan</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>ubuntu_test<span class="w"> </span>ubuntu<span class="w"> </span>sleep<span class="w"> </span>infinity
+</span></code></pre></div>
+<p>Explication :
+- <code>-d</code> : Exécute le conteneur en arrière-plan.
+- <code>--name ubuntu_test</code> : Donne un nom au conteneur (<code>ubuntu_test</code>).
+- <code>ubuntu</code> : Utilise l’image officielle Ubuntu.
+- <code>sleep infinity</code> : Empêche le conteneur de s’arrêter immédiatement.</p>
+<h3 id="etape-12-verifier-que-le-conteneur-est-bien-en-cours-dexecution">Étape 1.2 : Vérifier que le conteneur est bien en cours d’exécution</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>ps
+</span></code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Si tout est correct, vous devriez voir <strong>ubuntu_test</strong> en cours d’exécution.</p>
+</div>
+<hr />
+<h2 id="partie-2-executer-une-commande-dans-un-conteneur">Partie 2 : Exécuter une Commande dans un Conteneur</h2>
+<p>Nous allons maintenant exécuter des commandes à l’intérieur du conteneur.</p>
+<h3 id="etape-21-verifier-la-version-dubuntu">Étape 2.1 : Vérifier la version d’Ubuntu</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ubuntu_test<span class="w"> </span>cat<span class="w"> </span>/etc/os-release
+</span></code></pre></div>
+<p>Sortie attendue :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;Ubuntu&quot;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">VERSION</span><span class="o">=</span><span class="s2">&quot;...&quot;</span>
+</span></code></pre></div></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Cette commande <strong>exécute <code>cat /etc/os-release</code></strong> dans le conteneur et affiche la version d’Ubuntu.</p>
+</div>
+<h3 id="etape-22-lister-les-fichiers-dans-le-conteneur">Étape 2.2 : Lister les fichiers dans le conteneur</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ubuntu_test<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>/
+</span></code></pre></div>
+<p>Sortie attendue :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>total<span class="w"> </span>...
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>drwxr-xr-x<span class="w">   </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span>...<span class="w"> </span>bin
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>drwxr-xr-x<span class="w">   </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span>...<span class="w"> </span>boot
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>...
+</span></code></pre></div></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>On peut voir la structure des fichiers <strong>du système interne du conteneur</strong>.</p>
+</div>
+<hr />
+<h2 id="partie-3-acceder-a-un-shell-interactif">Partie 3 : Accéder à un Shell Interactif</h2>
+<p>Si vous voulez <strong>explorer un conteneur comme si vous étiez connecté directement à une machine</strong>, utilisez un shell interactif.</p>
+<h3 id="etape-31-ouvrir-un-terminal-dans-le-conteneur">Étape 3.1 : Ouvrir un terminal dans le conteneur</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>ubuntu_test<span class="w"> </span>bash
+</span></code></pre></div>
+<p>Explication :
+- <code>-i</code> : Active le mode interactif.
+- <code>-t</code> : Associe un pseudo-terminal (tty).
+- <code>bash</code> : Ouvre un shell <strong>Bash</strong> dans le conteneur.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Une fois la commande exécutée, votre invite de commande changera en quelque chose comme :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>root@&lt;container_id&gt;:/#
+</span></code></pre></div>
+Vous êtes maintenant <strong>dans le conteneur</strong> et pouvez exécuter des commandes comme sur une vraie machine Linux.</p>
+</div>
+<h3 id="etape-32-quitter-le-conteneur">Étape 3.2 : Quitter le conteneur</h3>
+<p>Pour quitter le shell, tapez :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">exit</span>
+</span></code></pre></div>
+ou utilisez le raccourci <code>Ctrl + D</code>.</p>
+<hr />
+<h2 id="partie-4-verifier-et-modifier-un-fichier-dans-un-conteneur">Partie 4 : Vérifier et Modifier un Fichier dans un Conteneur</h2>
+<p>Nous allons maintenant <strong>créer un fichier dans le conteneur</strong> et vérifier qu’il est bien présent.</p>
+<h3 id="etape-41-creer-un-fichier-dans-le-conteneur">Étape 4.1 : Créer un fichier dans le conteneur</h3>
+<p>Exécutez cette commande pour créer un fichier <code>/tmp/testfile.txt</code> à l’intérieur du conteneur :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ubuntu_test<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;Hello depuis le conteneur&#39; &gt; /tmp/testfile.txt&quot;</span>
+</span></code></pre></div></p>
+<h3 id="etape-42-verifier-que-le-fichier-existe">Étape 4.2 : Vérifier que le fichier existe</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ubuntu_test<span class="w"> </span>cat<span class="w"> </span>/tmp/testfile.txt
+</span></code></pre></div>
+<p>Sortie attendue :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Hello<span class="w"> </span>depuis<span class="w"> </span>le<span class="w"> </span>conteneur
+</span></code></pre></div></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Cela prouve que nous avons bien <strong>créé et modifié un fichier dans le conteneur</strong>.</p>
+</div>
+<hr />
+<h2 id="partie-5-lancer-un-service-dans-un-conteneur">Partie 5 : Lancer un Service dans un Conteneur</h2>
+<p>Nous allons maintenant tester le lancement d’un service <strong>nginx</strong> à l’intérieur d’un conteneur Ubuntu.</p>
+<h3 id="etape-51-installer-nginx-dans-le-conteneur">Étape 5.1 : Installer nginx dans le conteneur</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ubuntu_test<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ubuntu_test<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nginx
+</span></code></pre></div>
+<h3 id="etape-52-demarrer-nginx">Étape 5.2 : Démarrer nginx</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ubuntu_test<span class="w"> </span>service<span class="w"> </span>nginx<span class="w"> </span>start
+</span></code></pre></div>
+<h3 id="etape-53-verifier-que-nginx-fonctionne">Étape 5.3 : Vérifier que nginx fonctionne</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ubuntu_test<span class="w"> </span>service<span class="w"> </span>nginx<span class="w"> </span>status
+</span></code></pre></div>
+<p>Sortie attendue :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>*<span class="w"> </span>nginx<span class="w"> </span>is<span class="w"> </span>running
+</span></code></pre></div></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Nous avons installé et lancé un <strong>serveur web Nginx dans le conteneur</strong>.</p>
+</div>
+<hr />
+<h2 id="exercice-pratique">Exercice Pratique</h2>
+<h3 id="objectif">Objectif :</h3>
+<ol>
+<li><strong>Démarrer un conteneur basé sur Debian</strong> (<code>debian:latest</code>).</li>
+<li><strong>Créer un fichier <code>/root/exercice.txt</code></strong> dans le conteneur avec le texte <strong>"Docker exec fonctionne !"</strong>.</li>
+<li><strong>Vérifier que le fichier a bien été créé</strong>.</li>
+<li><strong>Lancer un shell interactif dans le conteneur et afficher le contenu du fichier</strong>.</li>
+</ol>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.tooltips", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.prune", "navigation.indexes", "navigation.top", "navigation.path", "navigation.sections"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

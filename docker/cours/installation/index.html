@@ -1,0 +1,791 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+    
+    
+      
+        <title>Installation de Docker sur Linux et Windows - Cours DevOps et Linux</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#installation-de-docker-sur-linux-et-windows" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Cours DevOps et Linux" class="md-header__button md-logo" aria-label="Cours DevOps et Linux" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 22v-2h3v-3h2v3.5c0 .39-.16.74-.46 1.04s-.65.46-1.04.46zM7 22H3.5c-.39 0-.74-.16-1.04-.46S2 20.89 2 20.5V17h2v3h3zM17 2h3.5c.39 0 .74.16 1.04.46s.46.65.46 1.04V7h-2V4h-3zM7 2v2H4v3H2V3.5c0-.39.16-.74.46-1.04S3.11 2 3.5 2zm6 15.25 4-2.3v-4.59l-4 2.3zm-1-6.33 4-2.29-4-2.35-4 2.35zm-5 4.03 4 2.3v-4.59l-4-2.3zm11.23-7.36c.5.32.77.75.77 1.32v6.32c0 .57-.27 1-.77 1.32l-5.48 3.18q-.75.48-1.5 0l-5.48-3.18c-.5-.32-.77-.75-.77-1.32V8.91c0-.57.27-1 .77-1.32l5.48-3.18c.25-.13.5-.19.75-.19s.5.06.75.19z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cours DevOps et Linux
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Installation de Docker sur Linux et Windows
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../linux/" class="md-tabs__link">
+          
+  
+    
+  
+  Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  Docker
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Cours DevOps et Linux" class="md-nav__button md-logo" aria-label="Cours DevOps et Linux" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 22v-2h3v-3h2v3.5c0 .39-.16.74-.46 1.04s-.65.46-1.04.46zM7 22H3.5c-.39 0-.74-.16-1.04-.46S2 20.89 2 20.5V17h2v3h3zM17 2h3.5c.39 0 .74.16 1.04.46s.46.65.46 1.04V7h-2V4h-3zM7 2v2H4v3H2V3.5c0-.39.16-.74.46-1.04S3.11 2 3.5 2zm6 15.25 4-2.3v-4.59l-4 2.3zm-1-6.33 4-2.29-4-2.35-4 2.35zm-5 4.03 4 2.3v-4.59l-4-2.3zm11.23-7.36c.5.32.77.75.77 1.32v6.32c0 .57-.27 1-.77 1.32l-5.48 3.18q-.75.48-1.5 0l-5.48-3.18c-.5-.32-.77-.75-.77-1.32V8.91c0-.57.27-1 .77-1.32l5.48-3.18c.25-.13.5-.19.75-.19s.5.06.75.19z"/></svg>
+
+    </a>
+    Cours DevOps et Linux
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../linux/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Linux
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Docker
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partie-1-installation-de-docker-sur-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 1 : Installation de Docker sur Linux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 1 : Installation de Docker sur Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-11-installation-de-docker-sur-ubuntudebian" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 1.1 : Installation de Docker sur Ubuntu/Debian
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-12-installation-de-docker-sur-centosrhel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 1.2 : Installation de Docker sur CentOS/RHEL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partie-2-installation-de-docker-sur-windows-avec-docker-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 2 : Installation de Docker sur Windows avec Docker Desktop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 2 : Installation de Docker sur Windows avec Docker Desktop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-21-telecharger-docker-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 2.1 : Télécharger Docker Desktop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-22-installation-de-docker-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 2.2 : Installation de Docker Desktop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-23-lancer-docker-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 2.3 : Lancer Docker Desktop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-24-verifier-linstallation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Étape 2.4 : Vérifier l'installation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partie-3-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 3 : Conclusion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 3 : Conclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resume-de-linstallation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Résumé de l'installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultats-attendus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Résultats attendus
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="installation-de-docker-sur-linux-et-windows">Installation de Docker sur Linux et Windows</h1>
+<p><img alt="Tutorial Cover" src="assets/docker-installation.jpg" /></p>
+<h2 id="introduction">Introduction</h2>
+<p>Docker est une plateforme de virtualisation légère qui permet de déployer des applications dans des conteneurs. Ces conteneurs sont des environnements isolés, offrant une grande portabilité et permettant d'éviter les problèmes liés aux environnements de développement et de production. Dans ce tutoriel, nous allons couvrir l'installation de Docker sur <strong>Linux</strong> et <strong>Windows</strong>, et vous fournir les étapes nécessaires pour commencer à travailler avec Docker dans ces deux environnements.</p>
+<hr />
+<h2 id="partie-1-installation-de-docker-sur-linux">Partie 1 : Installation de Docker sur Linux</h2>
+<p>Docker est très bien supporté sur la plupart des distributions Linux. Nous allons couvrir l'installation sur une distribution basée sur Debian/Ubuntu et RedHat/CentOS.</p>
+<h3 id="etape-11-installation-de-docker-sur-ubuntudebian">Étape 1.1 : Installation de Docker sur Ubuntu/Debian</h3>
+<ol>
+<li>
+<p><strong>Mettre à jour le système</strong> :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Installer les dépendances nécessaires</strong> :
+   Docker nécessite certains paquets pour fonctionner correctement, installez-les avec :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apt-transport-https<span class="w"> </span>ca-certificates<span class="w"> </span>curl<span class="w"> </span>software-properties-common
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Ajouter la clé GPG officielle de Docker</strong> :
+   Exécutez la commande suivante pour ajouter la clé GPG officielle de Docker à votre système :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.docker.com/linux/ubuntu/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>apt-key<span class="w"> </span>add<span class="w"> </span>-
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Ajouter le dépôt Docker</strong> :
+   Ajoutez le dépôt Docker aux sources de votre système pour pouvoir installer Docker :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span><span class="s2">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> stable&quot;</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Mettre à jour les sources et installer Docker</strong> :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce-cli<span class="w"> </span>containerd.io
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Vérifier l'installation</strong> :
+   Pour vérifier que Docker est correctement installé, exécutez :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>--version
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Démarrer et activer Docker</strong> :
+   Si Docker n’est pas déjà démarré, lancez-le et assurez-vous qu'il se lance automatiquement au démarrage :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>docker
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>docker
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Vérifier que Docker fonctionne</strong> :
+   Vous pouvez vérifier que Docker fonctionne correctement avec la commande suivante :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>hello-world
+</span></code></pre></div></p>
+</li>
+</ol>
+<p>Cette commande téléchargera une image de test et exécutera un conteneur, affichant un message de bienvenue si tout est bien configuré.</p>
+<hr />
+<h3 id="etape-12-installation-de-docker-sur-centosrhel">Étape 1.2 : Installation de Docker sur CentOS/RHEL</h3>
+<ol>
+<li>
+<p><strong>Mettre à jour le système</strong> :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>yum<span class="w"> </span>update<span class="w"> </span>-y
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Installer les dépendances</strong> :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>yum-utils<span class="w"> </span>device-mapper-persistent-data<span class="w"> </span>lvm2
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Ajouter le dépôt Docker</strong> :
+   Ajoutez le dépôt Docker officiel à vos sources :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>yum-config-manager<span class="w"> </span>--add-repo<span class="w"> </span>https://download.docker.com/linux/centos/docker-ce.repo
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Installer Docker</strong> :
+   Installez Docker avec :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce-cli<span class="w"> </span>containerd.io
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Démarrer et activer Docker</strong> :
+   Lancez Docker et assurez-vous qu'il se lance au démarrage :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>docker
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>docker
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Vérifier l'installation</strong> :
+   Vérifiez que Docker est bien installé :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>--version
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Exécuter un test</strong> :
+   Comme sur Ubuntu/Debian, vous pouvez tester l'installation avec :
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>hello-world
+</span></code></pre></div></p>
+</li>
+</ol>
+<hr />
+<h2 id="partie-2-installation-de-docker-sur-windows-avec-docker-desktop">Partie 2 : Installation de Docker sur Windows avec Docker Desktop</h2>
+<h3 id="etape-21-telecharger-docker-desktop">Étape 2.1 : Télécharger Docker Desktop</h3>
+<ol>
+<li>
+<p>Rendez-vous sur la page officielle de téléchargement de Docker Desktop pour Windows :
+   <a href="https://www.docker.com/products/docker-desktop">Docker Desktop - Télécharger</a></p>
+</li>
+<li>
+<p>Cliquez sur <strong>Download for Windows</strong> pour télécharger l'installateur.</p>
+</li>
+<li>
+<p>Une fois le fichier téléchargé, lancez l'installateur.</p>
+</li>
+</ol>
+<hr />
+<h3 id="etape-22-installation-de-docker-desktop">Étape 2.2 : Installation de Docker Desktop</h3>
+<ol>
+<li><strong>Lancer l'installateur</strong> :
+   Ouvrez le fichier téléchargé et suivez les étapes de l'installation. L'installateur va vous guider à travers les étapes suivantes :</li>
+<li>Accepter les conditions d'utilisation.</li>
+<li>Installer les composants nécessaires (Docker Desktop, WSL 2 si nécessaire).</li>
+<li>
+<p>Demander un redémarrage du système à la fin de l'installation.</p>
+</li>
+<li>
+<p><strong>Activer WSL 2</strong> :
+   Docker Desktop pour Windows utilise <strong>Windows Subsystem for Linux (WSL) 2</strong>. Si WSL 2 n’est pas déjà installé, Docker vous guidera pour l’installer pendant l'installation.</p>
+</li>
+</ol>
+<p>Si nécessaire, suivez ces étapes pour activer WSL 2 :
+   - Installez WSL via PowerShell en tant qu'administrateur :
+     <div class="language-powershell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">wsl</span> <span class="p">-</span><span class="n">-install</span>
+</span></code></pre></div>
+   - Redémarrez votre PC après l’installation de WSL.</p>
+<hr />
+<h3 id="etape-23-lancer-docker-desktop">Étape 2.3 : Lancer Docker Desktop</h3>
+<ol>
+<li>
+<p>Une fois l'installation terminée, ouvrez <strong>Docker Desktop</strong> en cliquant sur l'icône correspondante dans le menu démarrer ou la barre des tâches.</p>
+</li>
+<li>
+<p>Docker va se lancer et vous pourrez accéder à l'interface graphique de Docker.</p>
+</li>
+</ol>
+<hr />
+<h3 id="etape-24-verifier-linstallation">Étape 2.4 : Vérifier l'installation</h3>
+<ol>
+<li>
+<p>Ouvrez une fenêtre PowerShell ou <strong>CMD</strong> et tapez la commande suivante pour vérifier que Docker fonctionne :
+   <div class="language-powershell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">docker</span> <span class="p">-</span><span class="n">-version</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Lancez un conteneur de test pour vérifier que tout fonctionne bien :
+   <div class="language-powershell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">docker</span> <span class="n">run</span> <span class="n">hello-world</span>
+</span></code></pre></div></p>
+</li>
+</ol>
+<p>Vous devriez voir un message de bienvenue qui confirme que Docker fonctionne correctement.</p>
+<hr />
+<h2 id="partie-3-conclusion">Partie 3 : Conclusion</h2>
+<h3 id="resume-de-linstallation">Résumé de l'installation</h3>
+<ul>
+<li>
+<p><strong>Sur Linux</strong> : L'installation de Docker est relativement simple avec les gestionnaires de paquets comme <code>apt</code> pour Ubuntu/Debian ou <code>yum</code> pour CentOS/RHEL. Après l'installation, Docker peut être testé avec la commande <code>docker run hello-world</code>.</p>
+</li>
+<li>
+<p><strong>Sur Windows</strong> : Docker Desktop est l'outil recommandé pour utiliser Docker sur Windows. Il s’appuie sur WSL 2 pour offrir une expérience proche de celle d’un environnement Linux natif.</p>
+</li>
+</ul>
+<h3 id="resultats-attendus">Résultats attendus</h3>
+<ul>
+<li>Sur <strong>Linux</strong>, vous serez en mesure de lancer des conteneurs en utilisant Docker.</li>
+<li>Sur <strong>Windows</strong>, Docker Desktop vous permettra d'exécuter des conteneurs et de gérer vos images Docker grâce à une interface graphique simple et des commandes en ligne via PowerShell.</li>
+</ul>
+<p>Félicitations ! Vous avez maintenant Docker installé et vous pouvez commencer à explorer le monde des conteneurs !</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.tooltips", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.prune", "navigation.indexes", "navigation.top", "navigation.path", "navigation.sections"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
